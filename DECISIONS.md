@@ -28,3 +28,19 @@ environment. SMS is the verified outreach channel.
 prescribes.
 **Rejected:** Sending email via the AVMRE Microsoft Graph mailbox (would send marketing-demo
 mail from another company's production mailbox).
+
+## 2026-07-17 — AI module port scope
+
+**Decided:** Ported the Anthropic client + classifier + prompts + drafts queue with org_id.
+Dropped from the port: OpenRouter client (Anthropic key is available; one backend is enough for
+MVP), duplicate detection (plan says "copy if trivial — otherwise skip"; it depends on a
+separate duplicates service, not trivial), AI feedback-injection subsystem, websocket
+notification hub, FTO-merge proposals, and the client's PDF-parsing methods (insurance/utility/
+vendor-bill parsers — other products' surface, some of it accounting-adjacent).
+Prompts rewritten to remove AVMRE-specifics (office address heuristic, sublocations,
+inspections product, company name); added a `category` (trade) field to classification output
+because vendor outreach shortlists by trade.
+**Also decided:** Work-order draft approval no longer requires a vendor (the source enforced
+one). In this product the vendor is chosen AFTER approval via vendor outreach + dispatch — a
+work order starts vendor-less by design.
+
