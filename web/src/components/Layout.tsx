@@ -3,7 +3,10 @@ import { getSession, setSession } from '../lib/api'
 
 const nav = [
   { to: '/', label: 'Dashboard', exact: true },
+  { to: '/calendar', label: 'Calendar' },
+  { to: '/board', label: 'Pipeline' },
   { to: '/drafts', label: 'Review Queue' },
+  { to: '/outreach', label: 'Vendor Outreach' },
   { to: '/vendors', label: 'Vendors' },
   { to: '/preferred', label: 'Preferred Vendors' },
   { to: '/properties', label: 'Properties' },

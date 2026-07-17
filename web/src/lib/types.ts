@@ -123,6 +123,44 @@ export type OutreachRequest = {
   replies: OutreachReply[]
 }
 
+export type ScheduleItem = {
+  kind: 'work_order' | 'fto' | 'recurring' | 'calendar_event'
+  id: number
+  name: string
+  property_id?: number
+  property_name?: string
+  status?: string
+  priority?: string
+  category?: string
+  vendor_name?: string
+  start_at: string
+  end_at?: string
+  date_source: 'event' | 'due' | 'dispatch' | 'next_run'
+}
+
+/** Row from GET /api/outreach/all — an outreach request joined with its work order. */
+export type OutreachThread = {
+  id: number
+  work_order_id: number
+  vendor_id: number
+  vendor_name: string
+  vendor_phone?: string | null
+  vendor_email?: string | null
+  channel: 'sms' | 'email'
+  to_address: string
+  message_body: string
+  status: 'pending' | 'sent' | 'failed' | 'replied' | 'selected'
+  error?: string | null
+  sent_at?: string | null
+  created_at: string
+  work_order_name: string
+  work_order_status: string
+  property_name: string
+  trade: string
+  latest_reply_at?: string | null
+  replies?: OutreachReply[] | null
+}
+
 export type Shortlist = {
   source: 'preferred_list' | 'local_lookup'
   vendors: Vendor[]

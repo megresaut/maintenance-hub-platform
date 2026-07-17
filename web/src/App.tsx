@@ -2,6 +2,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import CalendarPage from './pages/CalendarPage'
+import Board from './pages/Board'
+import OutreachCenter from './pages/OutreachCenter'
 import Drafts from './pages/Drafts'
 import Vendors from './pages/Vendors'
 import Preferred from './pages/Preferred'
@@ -29,6 +32,9 @@ export default function App() {
           }
         >
           <Route path="/" element={<Dashboard />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/board" element={<Board />} />
+          <Route path="/outreach" element={<OutreachCenter />} />
           <Route path="/drafts" element={<Drafts />} />
           <Route path="/vendors" element={<Vendors />} />
           <Route path="/preferred" element={<Preferred />} />
