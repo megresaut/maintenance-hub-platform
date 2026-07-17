@@ -140,7 +140,7 @@ func (s *Service) ApproveDraft(ctx context.Context, orgID, id int64, req Approve
 	if err := s.repo.SetCreatedEntityID(ctx, orgID, id, entityID); err != nil {
 		return nil, err
 	}
-	return s.repo.GetByID(ctx, orgID, id)
+	return s.GetDraft(ctx, orgID, id)
 }
 
 // approveCascade approves a parent draft and all its pending children,
@@ -213,7 +213,7 @@ func (s *Service) approveCascade(ctx context.Context, orgID int64, parent *AIDra
 			log.Printf("[drafts] failed to set child draft %d entity ID: %v", r.draft.ID, err)
 		}
 	}
-	return s.repo.GetByID(ctx, orgID, parent.ID)
+	return s.GetDraft(ctx, orgID, parent.ID)
 }
 
 func (s *Service) rollback(ctx context.Context, orgID int64, entityType string, entityID int64) {

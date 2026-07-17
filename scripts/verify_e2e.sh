@@ -46,7 +46,8 @@ echo "work order $WO created"
 
 step "3. vendor outreach (shortlist + send)"
 curl -sf "${auth[@]}" -X POST $API/api/outreach/work-orders/$WO/trigger -d '{"max_vendors":2}' \
-  | python3 -c 'import json,sys; [print(f"  → {r[\"to_address\"]} via {r[\"channel\"]}: {r[\"status\"]}") for r in json.load(sys.stdin)]'
+  | python3 -c 'import json,sys
+for r in json.load(sys.stdin): print("  -> %s via %s: %s" % (r["to_address"], r["channel"], r["status"]))'
 
 step "4. vendor replies by SMS (routed into the ticket thread)"
 curl -sf -X POST $API/api/sms/webhook \
@@ -57,23 +58,28 @@ sleep 3
 curl -sf "${auth[@]}" $API/api/outreach/work-orders/$WO | python3 -c '
 import json,sys
 reqs=json.load(sys.stdin)
-replies=[rep for r in reqs for rep in (r["replies"] or [])]
+replies=[rep for r in reqs for rep in (r.get("replies") or [])]
 assert replies, "FAIL: reply not captured"
 r=replies[0]
-print(f"  reply captured: quote={r[\"parsed_quote_cents\"]} availability={r[\"parsed_availability\"]!r}")'
+print("  reply captured: quote=%s availability=%r" % (r["parsed_quote_cents"], r["parsed_availability"]))'
 
 step "5. PM dispatches to the vendor"
-curl -sf "${auth[@]}" -X POST $API/api/outreach/work-orders/$WO/dispatch -d '{"vendor_id":1,"reply_id":0,"note":"e2e"}' > /dev/null || \
-curl -sf "${auth[@]}" -X POST $API/api/outreach/work-orders/$WO/dispatch -d '{"vendor_id":1,"quote_cents":45000,"note":"e2e"}' > /dev/null
+REPLY=$(curl -sf "${auth[@]}" $API/api/outreach/work-orders/$WO | python3 -c '
+import json,sys
+reqs=json.load(sys.stdin)
+reps=[(rep["id"], r["vendor_id"]) for r in reqs for rep in (r.get("replies") or [])]
+print("%d %d" % reps[0] if reps else "")')
+curl -sf "${auth[@]}" -X POST $API/api/outreach/work-orders/$WO/dispatch \
+  -d "{\"vendor_id\":$(echo $REPLY | cut -d' ' -f2),\"reply_id\":$(echo $REPLY | cut -d' ' -f1),\"note\":\"e2e\"}" > /dev/null
 curl -sf "${auth[@]}" $API/api/work-orders/$WO | python3 -c '
 import json,sys
 w=json.load(sys.stdin)
-assert w["status"]=="dispatched", f"FAIL: status {w[\"status\"]}"
-print(f"  WO {w[\"id\"]} dispatched, vendor={w[\"vendor_id\"]} quote={w.get(\"quote_amount_cents\")}")'
+assert w["status"]=="dispatched", "FAIL: status %s" % w["status"]
+print("  WO %s dispatched, vendor=%s quote=%s" % (w["id"], w["vendor_id"], w.get("quote_amount_cents")))'
 
 step "6. activity feed"
 curl -sf "${auth[@]}" $API/api/activity/work_order/$WO | python3 -c '
 import json,sys
-for e in json.load(sys.stdin): print(f"  [{e[\"kind\"]}] {e[\"body\"][:80]}")'
+for e in json.load(sys.stdin): print("  [%s] %s" % (e["kind"], e["body"][:80]))'
 
 echo; echo "E2E PASS"
