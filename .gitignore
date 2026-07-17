@@ -1,0 +1,8 @@
+.env
+*.local
+node_modules/
+dist/
+api/bin/
+uploads/
+*.log
+.DS_Store
