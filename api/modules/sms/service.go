@@ -21,10 +21,12 @@ import (
 // classificationGap is how long a conversation sits quiet before its
 // unprocessed messages get classified (configurable for demos; the source
 // hardcoded 5 minutes). classificationThreshold triggers immediately.
-var (
-	classificationGap       = envDuration("SMS_CLASSIFY_GAP_SECONDS", 90*time.Second)
-	classificationThreshold = 5
-)
+// Read lazily — .env is loaded by main after package init.
+func classificationGap() time.Duration {
+	return envDuration("SMS_CLASSIFY_GAP_SECONDS", 90*time.Second)
+}
+
+const classificationThreshold = 5
 
 func envDuration(key string, fallback time.Duration) time.Duration {
 	if v := os.Getenv(key); v != "" {
@@ -159,12 +161,12 @@ func (s *Service) shouldClassify(ctx context.Context, conv *Conversation) bool {
 		return true
 	}
 	if len(messages) > 0 && conv.LastClassifiedAt != nil {
-		if time.Since(*conv.LastClassifiedAt) > classificationGap {
+		if time.Since(*conv.LastClassifiedAt) > classificationGap() {
 			return true
 		}
 	}
 	if len(messages) > 0 && conv.LastClassifiedAt == nil {
-		if time.Since(messages[0].CreatedAt) > classificationGap {
+		if time.Since(messages[0].CreatedAt) > classificationGap() {
 			return true
 		}
 	}
@@ -393,7 +395,7 @@ func (s *Service) StartPoller(ctx context.Context) {
 	go func() {
 		ticker := time.NewTicker(pollInterval)
 		defer ticker.Stop()
-		log.Printf("[sms] background poller started (interval=%s, gap=%s)", pollInterval, classificationGap)
+		log.Printf("[sms] background poller started (interval=%s, gap=%s)", pollInterval, classificationGap())
 		for {
 			select {
 			case <-ctx.Done():
@@ -407,7 +409,7 @@ func (s *Service) StartPoller(ctx context.Context) {
 }
 
 func (s *Service) pollStaleConversations(ctx context.Context) {
-	cutoff := time.Now().Add(-classificationGap)
+	cutoff := time.Now().Add(-classificationGap())
 	convs, err := s.repo.GetStaleConversations(ctx, cutoff)
 	if err != nil {
 		log.Printf("[sms] poller: failed to query stale conversations: %v", err)
