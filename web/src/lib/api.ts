@@ -39,7 +39,40 @@ export class ApiError extends Error {
   }
 }
 
+// Read-only demo mode (VITE_DEMO=1): the hosted deployment has no Go API or
+// Postgres behind it, so GETs are served from a snapshot of the real seeded
+// system and writes are declined with a friendly error. Login accepts the
+// demo credentials.
+export const DEMO = import.meta.env.VITE_DEMO === '1'
+
+async function demoApi<T>(path: string, opts: RequestInit = {}): Promise<T> {
+  const { default: fixtures } = await import('../demo/fixtures.json')
+  const fx = fixtures as Record<string, unknown>
+  const method = (opts.method ?? 'GET').toUpperCase()
+
+  if (path === '/api/auth/login' && method === 'POST') {
+    return { ...(fx['__login'] as object), token: 'demo-token' } as T
+  }
+  if (method !== 'GET') {
+    throw new ApiError(403, 'This hosted demo is read-only — clone the repo and run it locally for the full interactive pipeline (AI intake, vendor outreach, dispatch).')
+  }
+
+  const clean = path.split('#')[0]
+  const noQuery = clean.split('?')[0]
+  // Exact match (with query), then path-only, then prefix fallbacks for
+  // parameterized ranges like /api/schedule?from=...
+  for (const key of [clean, noQuery]) {
+    if (key in fx) return structuredClone(fx[key]) as T
+  }
+  if (noQuery.startsWith('/api/schedule')) return structuredClone(fx['/api/schedule']) as T
+  if (noQuery.startsWith('/api/drafts') && clean.includes('status=')) {
+    return structuredClone(fx['/api/drafts?status=pending']) as T
+  }
+  throw new ApiError(404, 'not in demo snapshot: ' + path)
+}
+
 export async function api<T>(path: string, opts: RequestInit = {}): Promise<T> {
+  if (DEMO) return demoApi<T>(path, opts)
   const token = localStorage.getItem(TOKEN_KEY)
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

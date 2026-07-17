@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "build": { "env": { "VITE_DEMO": "1" } },
+  "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }]
+}

@@ -1,0 +1,2381 @@
+{
+ "/api/properties": [
+  {
+   "id": 4,
+   "org_id": 1,
+   "name": "Birchwood Commons",
+   "address": "77 Birchwood Avenue, Norwalk, CT 06851",
+   "created_at": "2026-07-17T16:31:17.197183-04:00"
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "name": "Harborview Lofts",
+   "address": "18 Harbor Street, Stamford, CT 06902",
+   "created_at": "2026-07-17T16:31:17.197183-04:00"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "name": "Maple Court Apartments",
+   "address": "123 Main Street, Stamford, CT 06901",
+   "created_at": "2026-07-17T16:31:17.197183-04:00"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "name": "Oak Ridge Townhomes",
+   "address": "544 Oak Ridge Road, Greenwich, CT 06830",
+   "created_at": "2026-07-17T16:31:17.197183-04:00"
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "name": "Ridgeline Residences",
+   "address": "9 Ridgeline Drive, Greenwich, CT 06831",
+   "created_at": "2026-07-17T16:31:17.197183-04:00"
+  },
+  {
+   "id": 5,
+   "org_id": 1,
+   "name": "The Elm District",
+   "address": "210 Elm Street, Stamford, CT 06902",
+   "created_at": "2026-07-17T16:31:17.197183-04:00"
+  }
+ ],
+ "/api/vendors": [
+  {
+   "id": 4,
+   "org_id": 1,
+   "name": "Apex Climate Control",
+   "category": "hvac",
+   "service_area_tags": [
+    "greenwich"
+   ],
+   "primary_email": "jobs@apexclimate.test",
+   "phone": "+12035550144",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "name": "Brightline Electrical",
+   "category": "electrical",
+   "service_area_tags": [
+    "norwalk"
+   ],
+   "primary_email": "hello@brightlineelec.test",
+   "phone": "+12035550166",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "name": "Coastal HVAC Services",
+   "category": "hvac",
+   "service_area_tags": [
+    "stamford",
+    "norwalk"
+   ],
+   "primary_email": "service@coastalhvac.test",
+   "phone": "+12035550133",
+   "notes": "Carrier certified",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "name": "Dolce Plumbing",
+   "category": "plumbing",
+   "service_area_tags": [
+    "stamford",
+    "greenwich"
+   ],
+   "primary_email": "dispatch@dolceplumbing.test",
+   "phone": "+12035550111",
+   "notes": "Fast response, preferred for emergencies",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 7,
+   "org_id": 1,
+   "name": "Evergreen Landscaping Co",
+   "category": "landscaping",
+   "service_area_tags": [
+    "stamford",
+    "greenwich",
+    "norwalk"
+   ],
+   "primary_email": "crew@evergreenlandscape.test",
+   "phone": "+12035550177",
+   "notes": "Seasonal contract",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "name": "Harbor Point Plumbing & Heating",
+   "category": "plumbing",
+   "service_area_tags": [
+    "stamford",
+    "norwalk"
+   ],
+   "primary_email": "office@harborpointph.test",
+   "phone": "+12035550122",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 5,
+   "org_id": 1,
+   "name": "Nutmeg Electric",
+   "category": "electrical",
+   "service_area_tags": [
+    "greenwich",
+    "stamford"
+   ],
+   "primary_email": "jobs@nutmegelectric.test",
+   "phone": "+12035550155",
+   "notes": "Licensed E-1",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 10,
+   "org_id": 1,
+   "name": "Shoreline Pest Solutions",
+   "category": "pest_control",
+   "service_area_tags": [
+    "stamford",
+    "greenwich",
+    "norwalk"
+   ],
+   "primary_email": "help@shorelinepest.test",
+   "phone": "+12035550200",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 9,
+   "org_id": 1,
+   "name": "Sparkle Janitorial",
+   "category": "cleaning",
+   "service_area_tags": [
+    "stamford",
+    "norwalk"
+   ],
+   "primary_email": "book@sparklejan.test",
+   "phone": "+12035550199",
+   "notes": "Common-area turns",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  },
+  {
+   "id": 8,
+   "org_id": 1,
+   "name": "Summit Roofing & Gutter",
+   "category": "roofing",
+   "service_area_tags": [
+    "stamford",
+    "greenwich"
+   ],
+   "primary_email": "estimates@summitroofing.test",
+   "phone": "+12035550188",
+   "created_at": "2026-07-17T16:31:17.201212-04:00"
+  }
+ ],
+ "/api/preferred-vendors": [
+  {
+   "id": 5,
+   "org_id": 1,
+   "property_id": 3,
+   "category": "plumbing",
+   "vendor_id": 2,
+   "priority": 1,
+   "created_at": "2026-07-17T16:31:17.20264-04:00",
+   "vendor_name": "Harbor Point Plumbing & Heating",
+   "property_name": "Harborview Lofts"
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "property_id": 1,
+   "category": "hvac",
+   "vendor_id": 3,
+   "priority": 1,
+   "created_at": "2026-07-17T16:31:17.20264-04:00",
+   "vendor_name": "Coastal HVAC Services",
+   "property_name": "Maple Court Apartments"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "property_id": 1,
+   "category": "plumbing",
+   "vendor_id": 1,
+   "priority": 1,
+   "created_at": "2026-07-17T16:31:17.20264-04:00",
+   "vendor_name": "Dolce Plumbing",
+   "property_name": "Maple Court Apartments"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "property_id": 1,
+   "category": "plumbing",
+   "vendor_id": 2,
+   "priority": 2,
+   "created_at": "2026-07-17T16:31:17.20264-04:00",
+   "vendor_name": "Harbor Point Plumbing & Heating",
+   "property_name": "Maple Court Apartments"
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "property_id": 2,
+   "category": "electrical",
+   "vendor_id": 5,
+   "priority": 1,
+   "created_at": "2026-07-17T16:31:17.20264-04:00",
+   "vendor_name": "Nutmeg Electric",
+   "property_name": "Oak Ridge Townhomes"
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "property_id": 5,
+   "category": "cleaning",
+   "vendor_id": 9,
+   "priority": 1,
+   "created_at": "2026-07-17T16:31:17.20264-04:00",
+   "vendor_name": "Sparkle Janitorial",
+   "property_name": "The Elm District"
+  }
+ ],
+ "/api/tasks": [
+  {
+   "id": 5,
+   "org_id": 1,
+   "property_id": 5,
+   "name": "Hallway Lights Flickering",
+   "description": "3rd floor corridor lights strobe intermittently",
+   "status": "open",
+   "priority": "medium",
+   "property_name": "The Elm District",
+   "property_address": "210 Elm Street, Stamford, CT 06902",
+   "category": "electrical",
+   "due_date": null,
+   "date_requested": "2026-07-17T06:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "property_id": 3,
+   "name": "Boiler Pressure Drop",
+   "description": "Boiler losing pressure daily, units 3-9 lukewarm water",
+   "status": "pending_vendor",
+   "priority": "high",
+   "property_name": "Harborview Lofts",
+   "property_address": "18 Harbor Street, Stamford, CT 06902",
+   "category": "plumbing",
+   "due_date": null,
+   "date_requested": "2026-07-16T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "property_id": 2,
+   "name": "Clubhouse Electrical Failure",
+   "description": "Half the outlets dead, breaker trips repeatedly",
+   "status": "pending_vendor",
+   "priority": "high",
+   "property_name": "Oak Ridge Townhomes",
+   "property_address": "544 Oak Ridge Road, Greenwich, CT 06830",
+   "category": "electrical",
+   "due_date": null,
+   "date_requested": "2026-07-15T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "property_id": 4,
+   "name": "Lobby AC Blowing Warm",
+   "description": "Package unit on roof short-cycling, lobby at 81F",
+   "status": "in_progress",
+   "priority": "high",
+   "property_name": "Birchwood Commons",
+   "property_address": "77 Birchwood Avenue, Norwalk, CT 06851",
+   "category": "hvac",
+   "due_date": null,
+   "date_requested": "2026-07-13T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "property_id": 1,
+   "name": "Ceiling Leak - Unit 2B",
+   "description": "Water dripping through kitchen ceiling, worsening",
+   "status": "in_progress",
+   "priority": "urgent",
+   "property_name": "Maple Court Apartments",
+   "property_address": "123 Main Street, Stamford, CT 06901",
+   "category": "plumbing",
+   "due_date": null,
+   "date_requested": "2026-07-11T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "property_id": 6,
+   "name": "Gutter Overflow at North Wing",
+   "description": "Overflowing gutters staining facade after rain",
+   "status": "scheduled",
+   "priority": "medium",
+   "property_name": "Ridgeline Residences",
+   "property_address": "9 Ridgeline Drive, Greenwich, CT 06831",
+   "category": "roofing",
+   "due_date": null,
+   "date_requested": "2026-07-09T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 9,
+   "org_id": 1,
+   "property_id": 3,
+   "name": "Ant Activity in Mailroom",
+   "description": "Tenant reports ants around mailroom baseboards",
+   "status": "completed",
+   "priority": "medium",
+   "property_name": "Harborview Lofts",
+   "property_address": "18 Harbor Street, Stamford, CT 06902",
+   "category": "pest_control",
+   "due_date": null,
+   "date_requested": "2026-07-05T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 8,
+   "org_id": 1,
+   "property_id": 2,
+   "name": "Spring Irrigation Startup",
+   "description": "De-winterize irrigation, check zones",
+   "status": "completed",
+   "priority": "medium",
+   "property_name": "Oak Ridge Townhomes",
+   "property_address": "544 Oak Ridge Road, Greenwich, CT 06830",
+   "category": "landscaping",
+   "due_date": null,
+   "date_requested": "2026-07-02T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  },
+  {
+   "id": 7,
+   "org_id": 1,
+   "property_id": 1,
+   "name": "Dryer Vent Cleaning - Bldg A",
+   "description": "Annual dryer vent cleaning, 24 units",
+   "status": "completed",
+   "priority": "low",
+   "property_name": "Maple Court Apartments",
+   "property_address": "123 Main Street, Stamford, CT 06901",
+   "category": "cleaning",
+   "due_date": null,
+   "date_requested": "2026-06-27T16:31:17.20492-04:00",
+   "last_updated": "2026-07-17T16:31:17.20492-04:00",
+   "requested_by": null,
+   "assignees": [],
+   "collaborators": [],
+   "is_visible_to_client": false,
+   "is_editable_by_client": false,
+   "tags": [],
+   "closed_by": null,
+   "closed_at": null,
+   "reopened_at": null,
+   "is_template": false
+  }
+ ],
+ "/api/work-orders": [
+  {
+   "id": 5,
+   "org_id": 1,
+   "task_id": 5,
+   "property_id": 5,
+   "name": "Corridor Lighting Repair - 3rd Fl",
+   "description": "Trace flicker on corridor lighting circuit; replace ballasts/drivers as needed.",
+   "status": "new",
+   "priority": "medium",
+   "due_date": "2026-07-23T00:00:00-04:00",
+   "created_at": "2026-07-17T06:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "The Elm District",
+   "task_name": "Hallway Lights Flickering"
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "task_id": 3,
+   "property_id": 3,
+   "name": "Boiler Pressure Diagnosis",
+   "description": "Find pressure loss source; likely expansion tank or auto-fill valve.",
+   "status": "sent",
+   "priority": "high",
+   "due_date": "2026-07-20T00:00:00-04:00",
+   "created_at": "2026-07-16T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Harborview Lofts",
+   "task_name": "Boiler Pressure Drop"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "task_id": 2,
+   "property_id": 2,
+   "name": "Clubhouse Outlet & Breaker Repair",
+   "description": "Diagnose tripping breaker; repair dead outlet circuit in clubhouse.",
+   "status": "sent",
+   "priority": "high",
+   "due_date": "2026-07-21T00:00:00-04:00",
+   "created_at": "2026-07-15T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Oak Ridge Townhomes",
+   "task_name": "Clubhouse Electrical Failure"
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "task_id": 4,
+   "property_id": 4,
+   "vendor_id": 3,
+   "name": "Lobby RTU Repair",
+   "description": "Rooftop package unit short-cycling; replace contactor / check charge.",
+   "status": "dispatched",
+   "priority": "high",
+   "quote_amount_cents": 68000,
+   "event_start_at": "2026-07-20T13:00:00-04:00",
+   "event_end_at": "2026-07-20T15:00:00-04:00",
+   "dispatched_at": "2026-07-15T16:31:17.206452-04:00",
+   "created_at": "2026-07-13T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Birchwood Commons",
+   "task_name": "Lobby AC Blowing Warm"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "task_id": 1,
+   "property_id": 1,
+   "vendor_id": 1,
+   "name": "Ceiling Leak Repair - Unit 2B",
+   "description": "Locate and repair supply-line leak above kitchen ceiling; patch drywall.",
+   "status": "dispatched",
+   "priority": "urgent",
+   "quote_amount_cents": 45000,
+   "event_start_at": "2026-07-18T08:00:00-04:00",
+   "event_end_at": "2026-07-18T10:00:00-04:00",
+   "dispatched_at": "2026-07-12T16:31:17.206452-04:00",
+   "created_at": "2026-07-11T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Maple Court Apartments",
+   "task_name": "Ceiling Leak - Unit 2B"
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "task_id": 6,
+   "property_id": 6,
+   "vendor_id": 8,
+   "name": "Gutter Clearing & Realignment",
+   "description": "Clear north-wing gutters, realign two sagging runs, check downspouts.",
+   "status": "scheduled",
+   "priority": "medium",
+   "quote_amount_cents": 92500,
+   "event_start_at": "2026-07-25T09:00:00-04:00",
+   "event_end_at": "2026-07-25T12:00:00-04:00",
+   "dispatched_at": "2026-07-11T16:31:17.206452-04:00",
+   "created_at": "2026-07-09T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Ridgeline Residences",
+   "task_name": "Gutter Overflow at North Wing"
+  },
+  {
+   "id": 9,
+   "org_id": 1,
+   "task_id": 9,
+   "property_id": 3,
+   "vendor_id": 10,
+   "name": "Mailroom Ant Treatment",
+   "description": "Perimeter + baseboard gel bait treatment, follow-up in 2 weeks.",
+   "status": "completed",
+   "priority": "medium",
+   "quote_amount_cents": 22500,
+   "event_start_at": "2026-07-13T10:00:00-04:00",
+   "event_end_at": "2026-07-13T11:00:00-04:00",
+   "dispatched_at": "2026-07-06T16:31:17.206452-04:00",
+   "completed_at": "2026-07-13T11:00:00-04:00",
+   "created_at": "2026-07-05T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Harborview Lofts",
+   "task_name": "Ant Activity in Mailroom"
+  },
+  {
+   "id": 8,
+   "org_id": 1,
+   "task_id": 8,
+   "property_id": 2,
+   "vendor_id": 7,
+   "name": "Irrigation Spring Startup",
+   "description": "De-winterize, pressurize, inspect all 12 zones, replace 3 heads.",
+   "status": "completed",
+   "priority": "medium",
+   "quote_amount_cents": 38500,
+   "event_start_at": "2026-07-11T08:00:00-04:00",
+   "event_end_at": "2026-07-11T11:00:00-04:00",
+   "dispatched_at": "2026-07-04T16:31:17.206452-04:00",
+   "completed_at": "2026-07-11T11:00:00-04:00",
+   "created_at": "2026-07-02T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Oak Ridge Townhomes",
+   "task_name": "Spring Irrigation Startup"
+  },
+  {
+   "id": 7,
+   "org_id": 1,
+   "task_id": 7,
+   "property_id": 1,
+   "vendor_id": 9,
+   "name": "Dryer Vent Cleaning - Bldg A",
+   "description": "Annual dryer vent cleaning for 24 units.",
+   "status": "completed",
+   "priority": "low",
+   "quote_amount_cents": 120000,
+   "event_start_at": "2026-07-08T09:00:00-04:00",
+   "event_end_at": "2026-07-08T14:00:00-04:00",
+   "dispatched_at": "2026-06-29T16:31:17.206452-04:00",
+   "completed_at": "2026-07-08T14:00:00-04:00",
+   "created_at": "2026-06-27T16:31:17.206452-04:00",
+   "updated_at": "2026-07-17T16:31:17.206452-04:00",
+   "property_name": "Maple Court Apartments",
+   "task_name": "Dryer Vent Cleaning - Bldg A"
+  }
+ ],
+ "/api/ftos": [
+  {
+   "id": 3,
+   "org_id": 1,
+   "name": "Corridor lighting walkthrough",
+   "description": "Video the flicker pattern for the electrician, check panel",
+   "property_id": 5,
+   "property_name": "The Elm District",
+   "property_address": "210 Elm Street, Stamford, CT 06902",
+   "task_id": 5,
+   "field_team_member_ids": [
+    1
+   ],
+   "pm_assignee_ids": [],
+   "status": "new",
+   "priority": "medium",
+   "event_start_at": "2026-07-19T09:00:00-04:00",
+   "event_end_at": "2026-07-19T10:00:00-04:00",
+   "approval_status": "pending",
+   "form_submission_status": "none",
+   "is_visible_to_client": false,
+   "created_at": "2026-07-17T06:31:17.244359-04:00",
+   "task_name": "Hallway Lights Flickering",
+   "source": "manual"
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "name": "Boiler room check - daily log",
+   "description": "Record boiler pressure morning/evening until vendor visit",
+   "property_id": 3,
+   "property_name": "Harborview Lofts",
+   "property_address": "18 Harbor Street, Stamford, CT 06902",
+   "task_id": 3,
+   "field_team_member_ids": [
+    1
+   ],
+   "pm_assignee_ids": [],
+   "status": "in_progress",
+   "priority": "high",
+   "event_start_at": "2026-07-17T09:00:00-04:00",
+   "event_end_at": "2026-07-17T09:30:00-04:00",
+   "approval_status": "pending",
+   "form_submission_status": "none",
+   "is_visible_to_client": false,
+   "created_at": "2026-07-16T16:31:17.244359-04:00",
+   "task_name": "Boiler Pressure Drop",
+   "source": "manual"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "name": "Roof access for Coastal HVAC",
+   "description": "Unlock roof hatch, supervise RTU repair",
+   "property_id": 4,
+   "property_name": "Birchwood Commons",
+   "property_address": "77 Birchwood Avenue, Norwalk, CT 06851",
+   "task_id": 4,
+   "field_team_member_ids": [
+    1
+   ],
+   "pm_assignee_ids": [],
+   "status": "scheduled",
+   "priority": "high",
+   "event_start_at": "2026-07-20T13:00:00-04:00",
+   "event_end_at": "2026-07-20T15:00:00-04:00",
+   "approval_status": "pending",
+   "form_submission_status": "none",
+   "is_visible_to_client": false,
+   "created_at": "2026-07-15T16:31:17.244359-04:00",
+   "task_name": "Lobby AC Blowing Warm",
+   "source": "manual"
+  },
+  {
+   "id": 5,
+   "org_id": 1,
+   "name": "Mailroom follow-up inspection",
+   "description": "Confirm no ant activity after treatment",
+   "property_id": 3,
+   "property_name": "Harborview Lofts",
+   "property_address": "18 Harbor Street, Stamford, CT 06902",
+   "task_id": 9,
+   "field_team_member_ids": [
+    1
+   ],
+   "pm_assignee_ids": [],
+   "status": "scheduled",
+   "priority": "low",
+   "event_start_at": "2026-07-27T10:00:00-04:00",
+   "event_end_at": "2026-07-27T10:30:00-04:00",
+   "approval_status": "pending",
+   "form_submission_status": "none",
+   "is_visible_to_client": false,
+   "created_at": "2026-07-13T16:31:17.244359-04:00",
+   "task_name": "Ant Activity in Mailroom",
+   "source": "manual"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "name": "Meet Dolce Plumbing on-site - Unit 2B",
+   "description": "Let plumber into unit 2B, document repair, photos before/after",
+   "property_id": 1,
+   "property_name": "Maple Court Apartments",
+   "property_address": "123 Main Street, Stamford, CT 06901",
+   "task_id": 1,
+   "field_team_member_ids": [
+    1
+   ],
+   "pm_assignee_ids": [],
+   "status": "scheduled",
+   "priority": "urgent",
+   "event_start_at": "2026-07-18T08:00:00-04:00",
+   "event_end_at": "2026-07-18T10:00:00-04:00",
+   "approval_status": "pending",
+   "form_submission_status": "none",
+   "is_visible_to_client": false,
+   "created_at": "2026-07-12T16:31:17.244359-04:00",
+   "task_name": "Ceiling Leak - Unit 2B",
+   "source": "manual"
+  }
+ ],
+ "/api/recurring": [
+  {
+   "id": 3,
+   "org_id": 1,
+   "property_id": 6,
+   "unit_id": null,
+   "template_task_id": null,
+   "name": "Weekly Landscaping Visit",
+   "description": "Mow, edge, blow walkways",
+   "assignees": [],
+   "collaborators": [],
+   "priority": "low",
+   "category": "landscaping",
+   "frequency": "weekly",
+   "interval": 1,
+   "by_day": [],
+   "day_of_month": null,
+   "week_of_month": null,
+   "weekday_of_month": null,
+   "start_date": "2026-05-18T16:31:17.245876-04:00",
+   "end_date": null,
+   "due_after_days": 0,
+   "active": true,
+   "next_run_at": "2026-07-22T00:00:00-04:00",
+   "last_run_at": null,
+   "created_at": "2026-07-17T16:31:17.245876-04:00",
+   "updated_at": "2026-07-17T16:31:17.245876-04:00"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "property_id": 1,
+   "unit_id": null,
+   "template_task_id": null,
+   "name": "Monthly Common-Area Deep Clean",
+   "description": "Lobby, halls, laundry rooms",
+   "assignees": [],
+   "collaborators": [],
+   "priority": "medium",
+   "category": "cleaning",
+   "frequency": "monthly",
+   "interval": 1,
+   "by_day": [],
+   "day_of_month": null,
+   "week_of_month": null,
+   "weekday_of_month": null,
+   "start_date": "2026-04-18T16:31:17.245876-04:00",
+   "end_date": null,
+   "due_after_days": 0,
+   "active": true,
+   "next_run_at": "2026-07-29T00:00:00-04:00",
+   "last_run_at": null,
+   "created_at": "2026-07-17T16:31:17.245876-04:00",
+   "updated_at": "2026-07-17T16:31:17.245876-04:00"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "property_id": 4,
+   "unit_id": null,
+   "template_task_id": null,
+   "name": "Quarterly HVAC Filter Swap",
+   "description": "All RTU + common-area filters",
+   "assignees": [],
+   "collaborators": [],
+   "priority": "medium",
+   "category": "hvac",
+   "frequency": "monthly",
+   "interval": 3,
+   "by_day": [],
+   "day_of_month": null,
+   "week_of_month": null,
+   "weekday_of_month": null,
+   "start_date": "2025-12-29T16:31:17.245876-05:00",
+   "end_date": null,
+   "due_after_days": 0,
+   "active": true,
+   "next_run_at": "2026-08-04T00:00:00-04:00",
+   "last_run_at": null,
+   "created_at": "2026-07-17T16:31:17.245876-04:00",
+   "updated_at": "2026-07-17T16:31:17.245876-04:00"
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "property_id": 3,
+   "unit_id": null,
+   "template_task_id": null,
+   "name": "Annual Backflow Test",
+   "description": "City-required backflow certification",
+   "assignees": [],
+   "collaborators": [],
+   "priority": "high",
+   "category": "plumbing",
+   "frequency": "yearly",
+   "interval": 1,
+   "by_day": [],
+   "day_of_month": null,
+   "week_of_month": null,
+   "weekday_of_month": null,
+   "start_date": "2025-09-20T16:31:17.245876-04:00",
+   "end_date": null,
+   "due_after_days": 0,
+   "active": true,
+   "next_run_at": "2026-08-11T00:00:00-04:00",
+   "last_run_at": null,
+   "created_at": "2026-07-17T16:31:17.245876-04:00",
+   "updated_at": "2026-07-17T16:31:17.245876-04:00"
+  }
+ ],
+ "/api/task-categories": [
+  {
+   "id": 6,
+   "org_id": 1,
+   "name": "Cleaning",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "name": "Electrical",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  },
+  {
+   "id": 8,
+   "org_id": 1,
+   "name": "General",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "name": "HVAC",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  },
+  {
+   "id": 5,
+   "org_id": 1,
+   "name": "Landscaping",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  },
+  {
+   "id": 7,
+   "org_id": 1,
+   "name": "Pest Control",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "name": "Plumbing",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "name": "Roofing",
+   "is_active": true,
+   "created_at": "2026-07-17T16:31:17.203749-04:00"
+  }
+ ],
+ "/api/drafts?status=pending": [],
+ "/api/drafts?status=approved": [],
+ "/api/drafts?status=rejected": [],
+ "/api/drafts/count": {
+  "pending": 0
+ },
+ "/api/outreach/all": [
+  {
+   "id": 7,
+   "org_id": 1,
+   "work_order_id": 6,
+   "vendor_id": 8,
+   "channel": "email",
+   "to_address": "estimates@summitroofing.test",
+   "message_body": "Hi Summit Roofing & Gutter, this is Demo Property Management. We need roofing work at 9 Ridgeline Drive, Greenwich, CT 06831.\n\nJob: Gutter Clearing & Realignment \u2014 Clear north-wing gutters, realign two sagging runs, check downspouts.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-6",
+   "provider_ref": "simulated",
+   "status": "selected",
+   "sent_at": "2026-07-10T16:31:17.25061-04:00",
+   "created_at": "2026-07-17T16:31:17.25061-04:00",
+   "vendor_name": "Summit Roofing & Gutter",
+   "vendor_phone": "+12035550188",
+   "vendor_email": "estimates@summitroofing.test",
+   "replies": [
+    {
+     "id": 6,
+     "outreach_request_id": 7,
+     "body": "Thanks for reaching out \u2014 we can do the north wing next week. $925 for clearing, realignment of the two runs, and downspout check. Ref WO-6",
+     "media_urls": [],
+     "parsed_quote_cents": 92500,
+     "parsed_availability": "next week",
+     "raw_source_ref": "email:estimates@summitroofing.test",
+     "received_at": "2026-07-10T20:31:17.25084-04:00",
+     "created_at": "2026-07-17T16:31:17.25084-04:00"
+    }
+   ],
+   "work_order_name": "Gutter Clearing & Realignment",
+   "work_order_status": "scheduled",
+   "property_name": "Ridgeline Residences",
+   "trade": "roofing",
+   "latest_reply_at": "2026-07-10T20:31:17.25084-04:00"
+  },
+  {
+   "id": 5,
+   "org_id": 1,
+   "work_order_id": 3,
+   "vendor_id": 2,
+   "channel": "sms",
+   "to_address": "+12035550122",
+   "message_body": "Hi Harbor Point Plumbing & Heating, this is Demo Property Management. We need plumbing work at 18 Harbor Street, Stamford, CT 06902.\n\nJob: Boiler Pressure Diagnosis \u2014 Find pressure loss source; likely expansion tank or auto-fill valve.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-3",
+   "provider_ref": "SMmock004",
+   "status": "replied",
+   "sent_at": "2026-07-16T20:31:17.2497-04:00",
+   "created_at": "2026-07-17T16:31:17.2497-04:00",
+   "vendor_name": "Harbor Point Plumbing & Heating",
+   "vendor_phone": "+12035550122",
+   "vendor_email": "office@harborpointph.test",
+   "replies": [
+    {
+     "id": 4,
+     "outreach_request_id": 5,
+     "body": "Harbor Point: boiler work is our specialty. Wednesday 7:30am, $780 if it's the expansion tank (tank + labor). Ref WO-3",
+     "media_urls": [],
+     "parsed_quote_cents": 78000,
+     "parsed_availability": "Wednesday 7:30am",
+     "raw_source_ref": "sms:+12035550122",
+     "received_at": "2026-07-17T00:31:17.250299-04:00",
+     "created_at": "2026-07-17T16:31:17.250299-04:00"
+    }
+   ],
+   "work_order_name": "Boiler Pressure Diagnosis",
+   "work_order_status": "sent",
+   "property_name": "Harborview Lofts",
+   "trade": "plumbing",
+   "latest_reply_at": "2026-07-17T00:31:17.250299-04:00"
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "work_order_id": 3,
+   "vendor_id": 1,
+   "channel": "sms",
+   "to_address": "+12035550111",
+   "message_body": "Hi Dolce Plumbing, this is Demo Property Management. We need plumbing work at 18 Harbor Street, Stamford, CT 06902.\n\nJob: Boiler Pressure Diagnosis \u2014 Find pressure loss source; likely expansion tank or auto-fill valve.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-3",
+   "provider_ref": "SMmock005",
+   "status": "replied",
+   "sent_at": "2026-07-16T20:31:17.2497-04:00",
+   "created_at": "2026-07-17T16:31:17.2497-04:00",
+   "vendor_name": "Dolce Plumbing",
+   "vendor_phone": "+12035550111",
+   "vendor_email": "dispatch@dolceplumbing.test",
+   "replies": [
+    {
+     "id": 5,
+     "outreach_request_id": 6,
+     "body": "Dolce Plumbing \u2014 can look Friday. Diagnosis $150, repair quoted after. Ref WO-3",
+     "media_urls": [],
+     "parsed_quote_cents": 15000,
+     "parsed_availability": "Friday",
+     "raw_source_ref": "sms:+12035550111",
+     "received_at": "2026-07-17T04:31:17.250299-04:00",
+     "created_at": "2026-07-17T16:31:17.250299-04:00"
+    }
+   ],
+   "work_order_name": "Boiler Pressure Diagnosis",
+   "work_order_status": "sent",
+   "property_name": "Harborview Lofts",
+   "trade": "plumbing",
+   "latest_reply_at": "2026-07-17T04:31:17.250299-04:00"
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "work_order_id": 2,
+   "vendor_id": 6,
+   "channel": "email",
+   "to_address": "hello@brightlineelec.test",
+   "message_body": "Hi Brightline Electrical, this is Demo Property Management. We need electrical work at 544 Oak Ridge Road, Greenwich, CT 06830.\n\nJob: Clubhouse Outlet & Breaker Repair \u2014 Diagnose tripping breaker; repair dead outlet circuit in clubhouse.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-2",
+   "provider_ref": "simulated",
+   "status": "sent",
+   "sent_at": "2026-07-16T10:31:17.249086-04:00",
+   "created_at": "2026-07-17T16:31:17.249086-04:00",
+   "vendor_name": "Brightline Electrical",
+   "vendor_phone": "+12035550166",
+   "vendor_email": "hello@brightlineelec.test",
+   "work_order_name": "Clubhouse Outlet & Breaker Repair",
+   "work_order_status": "sent",
+   "property_name": "Oak Ridge Townhomes",
+   "trade": "electrical"
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "work_order_id": 2,
+   "vendor_id": 5,
+   "channel": "sms",
+   "to_address": "+12035550155",
+   "message_body": "Hi Nutmeg Electric, this is Demo Property Management. We need electrical work at 544 Oak Ridge Road, Greenwich, CT 06830.\n\nJob: Clubhouse Outlet & Breaker Repair \u2014 Diagnose tripping breaker; repair dead outlet circuit in clubhouse.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-2",
+   "provider_ref": "SMmock003",
+   "status": "replied",
+   "sent_at": "2026-07-16T10:31:17.249086-04:00",
+   "created_at": "2026-07-17T16:31:17.249086-04:00",
+   "vendor_name": "Nutmeg Electric",
+   "vendor_phone": "+12035550155",
+   "vendor_email": "jobs@nutmegelectric.test",
+   "replies": [
+    {
+     "id": 3,
+     "outreach_request_id": 3,
+     "body": "Nutmeg Electric \u2014 we can be out Thursday morning. $325 diagnostic + repair, panel work extra if the breaker itself is bad. Ref WO-2",
+     "media_urls": [],
+     "parsed_quote_cents": 32500,
+     "parsed_availability": "Thursday morning",
+     "raw_source_ref": "sms:+12035550155",
+     "received_at": "2026-07-16T18:31:17.249493-04:00",
+     "created_at": "2026-07-17T16:31:17.249493-04:00"
+    }
+   ],
+   "work_order_name": "Clubhouse Outlet & Breaker Repair",
+   "work_order_status": "sent",
+   "property_name": "Oak Ridge Townhomes",
+   "trade": "electrical",
+   "latest_reply_at": "2026-07-16T18:31:17.249493-04:00"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "work_order_id": 1,
+   "vendor_id": 2,
+   "channel": "sms",
+   "to_address": "+12035550122",
+   "message_body": "Hi Harbor Point Plumbing & Heating, this is Demo Property Management. We need plumbing work at 123 Main Street, Stamford, CT 06901.\n\nJob: Ceiling Leak Repair - Unit 2B \u2014 Locate and repair supply-line leak above kitchen ceiling; patch drywall.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-1",
+   "provider_ref": "SMmock002",
+   "status": "replied",
+   "sent_at": "2026-07-12T14:31:17.246921-04:00",
+   "created_at": "2026-07-17T16:31:17.246921-04:00",
+   "vendor_name": "Harbor Point Plumbing & Heating",
+   "vendor_phone": "+12035550122",
+   "vendor_email": "office@harborpointph.test",
+   "replies": [
+    {
+     "id": 2,
+     "outreach_request_id": 2,
+     "body": "Harbor Point here. Earliest is Monday. Ballpark $600-700 depending on ceiling access. Ref WO-1",
+     "media_urls": [],
+     "parsed_quote_cents": 60000,
+     "parsed_availability": "Monday",
+     "raw_source_ref": "sms:+12035550122",
+     "received_at": "2026-07-12T16:31:17.24836-04:00",
+     "created_at": "2026-07-17T16:31:17.24836-04:00"
+    }
+   ],
+   "work_order_name": "Ceiling Leak Repair - Unit 2B",
+   "work_order_status": "dispatched",
+   "property_name": "Maple Court Apartments",
+   "trade": "plumbing",
+   "latest_reply_at": "2026-07-12T16:31:17.24836-04:00"
+  },
+  {
+   "id": 1,
+   "org_id": 1,
+   "work_order_id": 1,
+   "vendor_id": 1,
+   "channel": "sms",
+   "to_address": "+12035550111",
+   "message_body": "Hi Dolce Plumbing, this is Demo Property Management. We need plumbing work at 123 Main Street, Stamford, CT 06901.\n\nJob: Ceiling Leak Repair - Unit 2B \u2014 Locate and repair supply-line leak above kitchen ceiling; patch drywall.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-1",
+   "provider_ref": "SMmock001",
+   "status": "selected",
+   "sent_at": "2026-07-12T14:31:17.246921-04:00",
+   "created_at": "2026-07-17T16:31:17.246921-04:00",
+   "vendor_name": "Dolce Plumbing",
+   "vendor_phone": "+12035550111",
+   "vendor_email": "dispatch@dolceplumbing.test",
+   "replies": [
+    {
+     "id": 1,
+     "outreach_request_id": 1,
+     "body": "Hi, Joe from Dolce Plumbing. We can take the ceiling leak job \u2014 tomorrow 8am works. Quote is $450 for diagnosis and repair, parts included. Ref WO-1",
+     "media_urls": [],
+     "parsed_quote_cents": 45000,
+     "parsed_availability": "tomorrow 8am",
+     "raw_source_ref": "sms:+12035550111",
+     "received_at": "2026-07-12T15:31:17.24836-04:00",
+     "created_at": "2026-07-17T16:31:17.24836-04:00"
+    }
+   ],
+   "work_order_name": "Ceiling Leak Repair - Unit 2B",
+   "work_order_status": "dispatched",
+   "property_name": "Maple Court Apartments",
+   "trade": "plumbing",
+   "latest_reply_at": "2026-07-12T15:31:17.24836-04:00"
+  }
+ ],
+ "/api/sms-admin/conversations": [
+  {
+   "id": 1,
+   "org_id": 1,
+   "phone_number": "+12035559999",
+   "status": "active",
+   "last_message_at": "2026-07-17T06:31:17.252393-04:00",
+   "last_classified_at": "2026-07-17T06:31:17.252393-04:00",
+   "is_group": false,
+   "created_at": "2026-07-17T16:31:17.252393-04:00",
+   "updated_at": "2026-07-17T16:31:17.252393-04:00"
+  }
+ ],
+ "/api/sms-admin/conversations/1/messages": [
+  {
+   "id": 3,
+   "conversation_id": 1,
+   "direction": "inbound",
+   "from_number": "+12035559999",
+   "to_number": "+18559255335",
+   "body": "Also the hallway lights on 3 have been flickering all morning at Elm District",
+   "media_urls": [],
+   "processed": true,
+   "created_at": "2026-07-17T06:31:17.25311-04:00"
+  },
+  {
+   "id": 4,
+   "conversation_id": 1,
+   "direction": "outbound",
+   "from_number": "+18559255335",
+   "to_number": "+12035559999",
+   "body": "Maintenance detected: Hallway Lights Flickering. Draft created \u2014 vendor selection needed.",
+   "media_urls": [],
+   "processed": true,
+   "created_at": "2026-07-17T06:31:17.25311-04:00"
+  },
+  {
+   "id": 1,
+   "conversation_id": 1,
+   "direction": "inbound",
+   "from_number": "+12035559999",
+   "to_number": "+18559255335",
+   "body": "Hi, tenant in unit 2B at 123 Main Street here. Water is dripping through the kitchen ceiling and getting worse - can you send a plumber asap?",
+   "media_urls": [],
+   "processed": true,
+   "created_at": "2026-07-11T16:31:17.25311-04:00"
+  },
+  {
+   "id": 2,
+   "conversation_id": 1,
+   "direction": "outbound",
+   "from_number": "+18559255335",
+   "to_number": "+12035559999",
+   "body": "Maintenance detected: Ceiling Leak - Unit 2B. Draft work order created for review.",
+   "media_urls": [],
+   "processed": true,
+   "created_at": "2026-07-11T16:31:17.25311-04:00"
+  }
+ ],
+ "/api/work-orders/5": {
+  "id": 5,
+  "org_id": 1,
+  "task_id": 5,
+  "property_id": 5,
+  "name": "Corridor Lighting Repair - 3rd Fl",
+  "description": "Trace flicker on corridor lighting circuit; replace ballasts/drivers as needed.",
+  "status": "new",
+  "priority": "medium",
+  "due_date": "2026-07-23T00:00:00-04:00",
+  "created_at": "2026-07-17T06:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "The Elm District",
+  "task_name": "Hallway Lights Flickering"
+ },
+ "/api/outreach/work-orders/5": [],
+ "/api/activity/work_order/5": [
+  {
+   "id": 16,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 5,
+   "kind": "created",
+   "actor_type": "ai",
+   "actor_name": "AI Intake",
+   "body": "Work order \"Corridor Lighting Repair - 3rd Fl\" drafted from tenant SMS and approved",
+   "metadata": {},
+   "created_at": "2026-07-17T06:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/5/shortlist": {
+  "source": "local_lookup",
+  "vendors": [
+   {
+    "id": 1,
+    "org_id": 1,
+    "name": "Dolce Plumbing",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "greenwich"
+    ],
+    "primary_email": "dispatch@dolceplumbing.test",
+    "phone": "+12035550111",
+    "notes": "Fast response, preferred for emergencies",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   },
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/3": {
+  "id": 3,
+  "org_id": 1,
+  "task_id": 3,
+  "property_id": 3,
+  "name": "Boiler Pressure Diagnosis",
+  "description": "Find pressure loss source; likely expansion tank or auto-fill valve.",
+  "status": "sent",
+  "priority": "high",
+  "due_date": "2026-07-20T00:00:00-04:00",
+  "created_at": "2026-07-16T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Harborview Lofts",
+  "task_name": "Boiler Pressure Drop"
+ },
+ "/api/outreach/work-orders/3": [
+  {
+   "id": 5,
+   "org_id": 1,
+   "work_order_id": 3,
+   "vendor_id": 2,
+   "channel": "sms",
+   "to_address": "+12035550122",
+   "message_body": "Hi Harbor Point Plumbing & Heating, this is Demo Property Management. We need plumbing work at 18 Harbor Street, Stamford, CT 06902.\n\nJob: Boiler Pressure Diagnosis \u2014 Find pressure loss source; likely expansion tank or auto-fill valve.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-3",
+   "provider_ref": "SMmock004",
+   "status": "replied",
+   "sent_at": "2026-07-16T20:31:17.2497-04:00",
+   "created_at": "2026-07-17T16:31:17.2497-04:00",
+   "vendor_name": "Harbor Point Plumbing & Heating",
+   "vendor_phone": "+12035550122",
+   "vendor_email": "office@harborpointph.test",
+   "replies": [
+    {
+     "id": 4,
+     "outreach_request_id": 5,
+     "body": "Harbor Point: boiler work is our specialty. Wednesday 7:30am, $780 if it's the expansion tank (tank + labor). Ref WO-3",
+     "media_urls": [],
+     "parsed_quote_cents": 78000,
+     "parsed_availability": "Wednesday 7:30am",
+     "raw_source_ref": "sms:+12035550122",
+     "received_at": "2026-07-17T00:31:17.250299-04:00",
+     "created_at": "2026-07-17T16:31:17.250299-04:00"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "work_order_id": 3,
+   "vendor_id": 1,
+   "channel": "sms",
+   "to_address": "+12035550111",
+   "message_body": "Hi Dolce Plumbing, this is Demo Property Management. We need plumbing work at 18 Harbor Street, Stamford, CT 06902.\n\nJob: Boiler Pressure Diagnosis \u2014 Find pressure loss source; likely expansion tank or auto-fill valve.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-3",
+   "provider_ref": "SMmock005",
+   "status": "replied",
+   "sent_at": "2026-07-16T20:31:17.2497-04:00",
+   "created_at": "2026-07-17T16:31:17.2497-04:00",
+   "vendor_name": "Dolce Plumbing",
+   "vendor_phone": "+12035550111",
+   "vendor_email": "dispatch@dolceplumbing.test",
+   "replies": [
+    {
+     "id": 5,
+     "outreach_request_id": 6,
+     "body": "Dolce Plumbing \u2014 can look Friday. Diagnosis $150, repair quoted after. Ref WO-3",
+     "media_urls": [],
+     "parsed_quote_cents": 15000,
+     "parsed_availability": "Friday",
+     "raw_source_ref": "sms:+12035550111",
+     "received_at": "2026-07-17T04:31:17.250299-04:00",
+     "created_at": "2026-07-17T16:31:17.250299-04:00"
+    }
+   ]
+  }
+ ],
+ "/api/activity/work_order/3": [
+  {
+   "id": 10,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 3,
+   "kind": "created",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Work order \"Boiler Pressure Diagnosis\" created",
+   "metadata": {},
+   "created_at": "2026-07-16T16:31:17.251222-04:00"
+  },
+  {
+   "id": 11,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 3,
+   "kind": "outreach_sent",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Outreach sent to 2 vendor(s) (preferred_list): Harbor Point Plumbing & Heating via sms, Dolce Plumbing via sms",
+   "metadata": {},
+   "created_at": "2026-07-16T20:31:17.251222-04:00"
+  },
+  {
+   "id": 12,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 3,
+   "kind": "outreach_reply",
+   "actor_type": "vendor",
+   "actor_name": "Harbor Point Plumbing & Heating",
+   "body": "Harbor Point replied \u2014 quoted $780.00: Wednesday 7:30am",
+   "metadata": {},
+   "created_at": "2026-07-17T00:31:17.251222-04:00"
+  },
+  {
+   "id": 13,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 3,
+   "kind": "outreach_reply",
+   "actor_type": "vendor",
+   "actor_name": "Dolce Plumbing",
+   "body": "Dolce Plumbing replied \u2014 quoted $150.00 diagnosis: Friday",
+   "metadata": {},
+   "created_at": "2026-07-17T04:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/3/shortlist": {
+  "source": "preferred_list",
+  "vendors": [
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/2": {
+  "id": 2,
+  "org_id": 1,
+  "task_id": 2,
+  "property_id": 2,
+  "name": "Clubhouse Outlet & Breaker Repair",
+  "description": "Diagnose tripping breaker; repair dead outlet circuit in clubhouse.",
+  "status": "sent",
+  "priority": "high",
+  "due_date": "2026-07-21T00:00:00-04:00",
+  "created_at": "2026-07-15T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Oak Ridge Townhomes",
+  "task_name": "Clubhouse Electrical Failure"
+ },
+ "/api/outreach/work-orders/2": [
+  {
+   "id": 3,
+   "org_id": 1,
+   "work_order_id": 2,
+   "vendor_id": 5,
+   "channel": "sms",
+   "to_address": "+12035550155",
+   "message_body": "Hi Nutmeg Electric, this is Demo Property Management. We need electrical work at 544 Oak Ridge Road, Greenwich, CT 06830.\n\nJob: Clubhouse Outlet & Breaker Repair \u2014 Diagnose tripping breaker; repair dead outlet circuit in clubhouse.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-2",
+   "provider_ref": "SMmock003",
+   "status": "replied",
+   "sent_at": "2026-07-16T10:31:17.249086-04:00",
+   "created_at": "2026-07-17T16:31:17.249086-04:00",
+   "vendor_name": "Nutmeg Electric",
+   "vendor_phone": "+12035550155",
+   "vendor_email": "jobs@nutmegelectric.test",
+   "replies": [
+    {
+     "id": 3,
+     "outreach_request_id": 3,
+     "body": "Nutmeg Electric \u2014 we can be out Thursday morning. $325 diagnostic + repair, panel work extra if the breaker itself is bad. Ref WO-2",
+     "media_urls": [],
+     "parsed_quote_cents": 32500,
+     "parsed_availability": "Thursday morning",
+     "raw_source_ref": "sms:+12035550155",
+     "received_at": "2026-07-16T18:31:17.249493-04:00",
+     "created_at": "2026-07-17T16:31:17.249493-04:00"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "work_order_id": 2,
+   "vendor_id": 6,
+   "channel": "email",
+   "to_address": "hello@brightlineelec.test",
+   "message_body": "Hi Brightline Electrical, this is Demo Property Management. We need electrical work at 544 Oak Ridge Road, Greenwich, CT 06830.\n\nJob: Clubhouse Outlet & Breaker Repair \u2014 Diagnose tripping breaker; repair dead outlet circuit in clubhouse.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-2",
+   "provider_ref": "simulated",
+   "status": "sent",
+   "sent_at": "2026-07-16T10:31:17.249086-04:00",
+   "created_at": "2026-07-17T16:31:17.249086-04:00",
+   "vendor_name": "Brightline Electrical",
+   "vendor_phone": "+12035550166",
+   "vendor_email": "hello@brightlineelec.test"
+  }
+ ],
+ "/api/activity/work_order/2": [
+  {
+   "id": 7,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 2,
+   "kind": "created",
+   "actor_type": "ai",
+   "actor_name": "AI Intake",
+   "body": "Work order \"Clubhouse Outlet & Breaker Repair\" drafted from tenant SMS and approved",
+   "metadata": {},
+   "created_at": "2026-07-15T16:31:17.251222-04:00"
+  },
+  {
+   "id": 8,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 2,
+   "kind": "outreach_sent",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Outreach sent to 2 vendor(s) (preferred_list): Nutmeg Electric via sms, Brightline Electrical via email",
+   "metadata": {},
+   "created_at": "2026-07-16T10:31:17.251222-04:00"
+  },
+  {
+   "id": 9,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 2,
+   "kind": "outreach_reply",
+   "actor_type": "vendor",
+   "actor_name": "Nutmeg Electric",
+   "body": "Nutmeg Electric replied \u2014 quoted $325.00: Thursday morning",
+   "metadata": {},
+   "created_at": "2026-07-16T18:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/2/shortlist": {
+  "source": "local_lookup",
+  "vendors": [
+   {
+    "id": 1,
+    "org_id": 1,
+    "name": "Dolce Plumbing",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "greenwich"
+    ],
+    "primary_email": "dispatch@dolceplumbing.test",
+    "phone": "+12035550111",
+    "notes": "Fast response, preferred for emergencies",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   },
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/4": {
+  "id": 4,
+  "org_id": 1,
+  "task_id": 4,
+  "property_id": 4,
+  "vendor_id": 3,
+  "name": "Lobby RTU Repair",
+  "description": "Rooftop package unit short-cycling; replace contactor / check charge.",
+  "status": "dispatched",
+  "priority": "high",
+  "quote_amount_cents": 68000,
+  "event_start_at": "2026-07-20T13:00:00-04:00",
+  "event_end_at": "2026-07-20T15:00:00-04:00",
+  "dispatched_at": "2026-07-15T16:31:17.206452-04:00",
+  "created_at": "2026-07-13T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Birchwood Commons",
+  "task_name": "Lobby AC Blowing Warm"
+ },
+ "/api/outreach/work-orders/4": [],
+ "/api/activity/work_order/4": [
+  {
+   "id": 14,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 4,
+   "kind": "created",
+   "actor_type": "ai",
+   "actor_name": "AI Intake",
+   "body": "Work order \"Lobby RTU Repair\" drafted from Outlook event and approved",
+   "metadata": {},
+   "created_at": "2026-07-13T16:31:17.251222-04:00"
+  },
+  {
+   "id": 15,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 4,
+   "kind": "dispatched",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Dispatched to Coastal HVAC Services at $680.00.",
+   "metadata": {},
+   "created_at": "2026-07-15T16:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/4/shortlist": {
+  "source": "local_lookup",
+  "vendors": [
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   },
+   {
+    "id": 1,
+    "org_id": 1,
+    "name": "Dolce Plumbing",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "greenwich"
+    ],
+    "primary_email": "dispatch@dolceplumbing.test",
+    "phone": "+12035550111",
+    "notes": "Fast response, preferred for emergencies",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/1": {
+  "id": 1,
+  "org_id": 1,
+  "task_id": 1,
+  "property_id": 1,
+  "vendor_id": 1,
+  "name": "Ceiling Leak Repair - Unit 2B",
+  "description": "Locate and repair supply-line leak above kitchen ceiling; patch drywall.",
+  "status": "dispatched",
+  "priority": "urgent",
+  "quote_amount_cents": 45000,
+  "event_start_at": "2026-07-18T08:00:00-04:00",
+  "event_end_at": "2026-07-18T10:00:00-04:00",
+  "dispatched_at": "2026-07-12T16:31:17.206452-04:00",
+  "created_at": "2026-07-11T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Maple Court Apartments",
+  "task_name": "Ceiling Leak - Unit 2B"
+ },
+ "/api/outreach/work-orders/1": [
+  {
+   "id": 1,
+   "org_id": 1,
+   "work_order_id": 1,
+   "vendor_id": 1,
+   "channel": "sms",
+   "to_address": "+12035550111",
+   "message_body": "Hi Dolce Plumbing, this is Demo Property Management. We need plumbing work at 123 Main Street, Stamford, CT 06901.\n\nJob: Ceiling Leak Repair - Unit 2B \u2014 Locate and repair supply-line leak above kitchen ceiling; patch drywall.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-1",
+   "provider_ref": "SMmock001",
+   "status": "selected",
+   "sent_at": "2026-07-12T14:31:17.246921-04:00",
+   "created_at": "2026-07-17T16:31:17.246921-04:00",
+   "vendor_name": "Dolce Plumbing",
+   "vendor_phone": "+12035550111",
+   "vendor_email": "dispatch@dolceplumbing.test",
+   "replies": [
+    {
+     "id": 1,
+     "outreach_request_id": 1,
+     "body": "Hi, Joe from Dolce Plumbing. We can take the ceiling leak job \u2014 tomorrow 8am works. Quote is $450 for diagnosis and repair, parts included. Ref WO-1",
+     "media_urls": [],
+     "parsed_quote_cents": 45000,
+     "parsed_availability": "tomorrow 8am",
+     "raw_source_ref": "sms:+12035550111",
+     "received_at": "2026-07-12T15:31:17.24836-04:00",
+     "created_at": "2026-07-17T16:31:17.24836-04:00"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "work_order_id": 1,
+   "vendor_id": 2,
+   "channel": "sms",
+   "to_address": "+12035550122",
+   "message_body": "Hi Harbor Point Plumbing & Heating, this is Demo Property Management. We need plumbing work at 123 Main Street, Stamford, CT 06901.\n\nJob: Ceiling Leak Repair - Unit 2B \u2014 Locate and repair supply-line leak above kitchen ceiling; patch drywall.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-1",
+   "provider_ref": "SMmock002",
+   "status": "replied",
+   "sent_at": "2026-07-12T14:31:17.246921-04:00",
+   "created_at": "2026-07-17T16:31:17.246921-04:00",
+   "vendor_name": "Harbor Point Plumbing & Heating",
+   "vendor_phone": "+12035550122",
+   "vendor_email": "office@harborpointph.test",
+   "replies": [
+    {
+     "id": 2,
+     "outreach_request_id": 2,
+     "body": "Harbor Point here. Earliest is Monday. Ballpark $600-700 depending on ceiling access. Ref WO-1",
+     "media_urls": [],
+     "parsed_quote_cents": 60000,
+     "parsed_availability": "Monday",
+     "raw_source_ref": "sms:+12035550122",
+     "received_at": "2026-07-12T16:31:17.24836-04:00",
+     "created_at": "2026-07-17T16:31:17.24836-04:00"
+    }
+   ]
+  }
+ ],
+ "/api/activity/work_order/1": [
+  {
+   "id": 1,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 1,
+   "kind": "created",
+   "actor_type": "ai",
+   "actor_name": "AI Intake",
+   "body": "Work order \"Ceiling Leak Repair - Unit 2B\" drafted from tenant SMS and approved",
+   "metadata": {},
+   "created_at": "2026-07-11T16:31:17.251222-04:00"
+  },
+  {
+   "id": 2,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 1,
+   "kind": "outreach_sent",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Outreach sent to 2 vendor(s) (preferred_list): Dolce Plumbing via sms, Harbor Point Plumbing & Heating via sms",
+   "metadata": {},
+   "created_at": "2026-07-12T14:31:17.251222-04:00"
+  },
+  {
+   "id": 3,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 1,
+   "kind": "outreach_reply",
+   "actor_type": "vendor",
+   "actor_name": "Dolce Plumbing",
+   "body": "Dolce Plumbing replied \u2014 quoted $450.00: tomorrow 8am works, parts included",
+   "metadata": {},
+   "created_at": "2026-07-12T15:31:17.251222-04:00"
+  },
+  {
+   "id": 4,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 1,
+   "kind": "outreach_reply",
+   "actor_type": "vendor",
+   "actor_name": "Harbor Point Plumbing & Heating",
+   "body": "Harbor Point replied \u2014 quoted $600.00: earliest Monday",
+   "metadata": {},
+   "created_at": "2026-07-12T16:31:17.251222-04:00"
+  },
+  {
+   "id": 5,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 1,
+   "kind": "dispatched",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Dispatched to Dolce Plumbing at $450.00. Confirmed with tenant for tomorrow 8am.",
+   "metadata": {},
+   "created_at": "2026-07-12T16:31:17.251222-04:00"
+  },
+  {
+   "id": 6,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 1,
+   "kind": "note",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Tenant confirmed access; lockbox code shared with Dolce.",
+   "metadata": {},
+   "created_at": "2026-07-13T16:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/1/shortlist": {
+  "source": "preferred_list",
+  "vendors": [
+   {
+    "id": 1,
+    "org_id": 1,
+    "name": "Dolce Plumbing",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "greenwich"
+    ],
+    "primary_email": "dispatch@dolceplumbing.test",
+    "phone": "+12035550111",
+    "notes": "Fast response, preferred for emergencies",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   },
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/6": {
+  "id": 6,
+  "org_id": 1,
+  "task_id": 6,
+  "property_id": 6,
+  "vendor_id": 8,
+  "name": "Gutter Clearing & Realignment",
+  "description": "Clear north-wing gutters, realign two sagging runs, check downspouts.",
+  "status": "scheduled",
+  "priority": "medium",
+  "quote_amount_cents": 92500,
+  "event_start_at": "2026-07-25T09:00:00-04:00",
+  "event_end_at": "2026-07-25T12:00:00-04:00",
+  "dispatched_at": "2026-07-11T16:31:17.206452-04:00",
+  "created_at": "2026-07-09T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Ridgeline Residences",
+  "task_name": "Gutter Overflow at North Wing"
+ },
+ "/api/outreach/work-orders/6": [
+  {
+   "id": 7,
+   "org_id": 1,
+   "work_order_id": 6,
+   "vendor_id": 8,
+   "channel": "email",
+   "to_address": "estimates@summitroofing.test",
+   "message_body": "Hi Summit Roofing & Gutter, this is Demo Property Management. We need roofing work at 9 Ridgeline Drive, Greenwich, CT 06831.\n\nJob: Gutter Clearing & Realignment \u2014 Clear north-wing gutters, realign two sagging runs, check downspouts.\n\nCan you take this job? Please reply with your availability and a quote. Reference: WO-6",
+   "provider_ref": "simulated",
+   "status": "selected",
+   "sent_at": "2026-07-10T16:31:17.25061-04:00",
+   "created_at": "2026-07-17T16:31:17.25061-04:00",
+   "vendor_name": "Summit Roofing & Gutter",
+   "vendor_phone": "+12035550188",
+   "vendor_email": "estimates@summitroofing.test",
+   "replies": [
+    {
+     "id": 6,
+     "outreach_request_id": 7,
+     "body": "Thanks for reaching out \u2014 we can do the north wing next week. $925 for clearing, realignment of the two runs, and downspout check. Ref WO-6",
+     "media_urls": [],
+     "parsed_quote_cents": 92500,
+     "parsed_availability": "next week",
+     "raw_source_ref": "email:estimates@summitroofing.test",
+     "received_at": "2026-07-10T20:31:17.25084-04:00",
+     "created_at": "2026-07-17T16:31:17.25084-04:00"
+    }
+   ]
+  }
+ ],
+ "/api/activity/work_order/6": [
+  {
+   "id": 17,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 6,
+   "kind": "dispatched",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Dispatched to Summit Roofing & Gutter at $925.00.",
+   "metadata": {},
+   "created_at": "2026-07-11T16:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/6/shortlist": {
+  "source": "local_lookup",
+  "vendors": [
+   {
+    "id": 1,
+    "org_id": 1,
+    "name": "Dolce Plumbing",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "greenwich"
+    ],
+    "primary_email": "dispatch@dolceplumbing.test",
+    "phone": "+12035550111",
+    "notes": "Fast response, preferred for emergencies",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   },
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/9": {
+  "id": 9,
+  "org_id": 1,
+  "task_id": 9,
+  "property_id": 3,
+  "vendor_id": 10,
+  "name": "Mailroom Ant Treatment",
+  "description": "Perimeter + baseboard gel bait treatment, follow-up in 2 weeks.",
+  "status": "completed",
+  "priority": "medium",
+  "quote_amount_cents": 22500,
+  "event_start_at": "2026-07-13T10:00:00-04:00",
+  "event_end_at": "2026-07-13T11:00:00-04:00",
+  "dispatched_at": "2026-07-06T16:31:17.206452-04:00",
+  "completed_at": "2026-07-13T11:00:00-04:00",
+  "created_at": "2026-07-05T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Harborview Lofts",
+  "task_name": "Ant Activity in Mailroom"
+ },
+ "/api/outreach/work-orders/9": [],
+ "/api/activity/work_order/9": [
+  {
+   "id": 20,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 9,
+   "kind": "status_change",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Status changed from dispatched to completed",
+   "metadata": {},
+   "created_at": "2026-07-13T16:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/9/shortlist": {
+  "source": "preferred_list",
+  "vendors": [
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/8": {
+  "id": 8,
+  "org_id": 1,
+  "task_id": 8,
+  "property_id": 2,
+  "vendor_id": 7,
+  "name": "Irrigation Spring Startup",
+  "description": "De-winterize, pressurize, inspect all 12 zones, replace 3 heads.",
+  "status": "completed",
+  "priority": "medium",
+  "quote_amount_cents": 38500,
+  "event_start_at": "2026-07-11T08:00:00-04:00",
+  "event_end_at": "2026-07-11T11:00:00-04:00",
+  "dispatched_at": "2026-07-04T16:31:17.206452-04:00",
+  "completed_at": "2026-07-11T11:00:00-04:00",
+  "created_at": "2026-07-02T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Oak Ridge Townhomes",
+  "task_name": "Spring Irrigation Startup"
+ },
+ "/api/outreach/work-orders/8": [],
+ "/api/activity/work_order/8": [
+  {
+   "id": 19,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 8,
+   "kind": "status_change",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Status changed from dispatched to completed",
+   "metadata": {},
+   "created_at": "2026-07-11T16:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/8/shortlist": {
+  "source": "local_lookup",
+  "vendors": [
+   {
+    "id": 1,
+    "org_id": 1,
+    "name": "Dolce Plumbing",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "greenwich"
+    ],
+    "primary_email": "dispatch@dolceplumbing.test",
+    "phone": "+12035550111",
+    "notes": "Fast response, preferred for emergencies",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   },
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/work-orders/7": {
+  "id": 7,
+  "org_id": 1,
+  "task_id": 7,
+  "property_id": 1,
+  "vendor_id": 9,
+  "name": "Dryer Vent Cleaning - Bldg A",
+  "description": "Annual dryer vent cleaning for 24 units.",
+  "status": "completed",
+  "priority": "low",
+  "quote_amount_cents": 120000,
+  "event_start_at": "2026-07-08T09:00:00-04:00",
+  "event_end_at": "2026-07-08T14:00:00-04:00",
+  "dispatched_at": "2026-06-29T16:31:17.206452-04:00",
+  "completed_at": "2026-07-08T14:00:00-04:00",
+  "created_at": "2026-06-27T16:31:17.206452-04:00",
+  "updated_at": "2026-07-17T16:31:17.206452-04:00",
+  "property_name": "Maple Court Apartments",
+  "task_name": "Dryer Vent Cleaning - Bldg A"
+ },
+ "/api/outreach/work-orders/7": [],
+ "/api/activity/work_order/7": [
+  {
+   "id": 18,
+   "org_id": 1,
+   "ticket_type": "work_order",
+   "ticket_id": 7,
+   "kind": "status_change",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Status changed from dispatched to completed",
+   "metadata": {},
+   "created_at": "2026-07-08T16:31:17.251222-04:00"
+  }
+ ],
+ "/api/outreach/work-orders/7/shortlist": {
+  "source": "preferred_list",
+  "vendors": [
+   {
+    "id": 1,
+    "org_id": 1,
+    "name": "Dolce Plumbing",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "greenwich"
+    ],
+    "primary_email": "dispatch@dolceplumbing.test",
+    "phone": "+12035550111",
+    "notes": "Fast response, preferred for emergencies",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   },
+   {
+    "id": 2,
+    "org_id": 1,
+    "name": "Harbor Point Plumbing & Heating",
+    "category": "plumbing",
+    "service_area_tags": [
+     "stamford",
+     "norwalk"
+    ],
+    "primary_email": "office@harborpointph.test",
+    "phone": "+12035550122",
+    "created_at": "2026-07-17T16:31:17.201212-04:00"
+   }
+  ]
+ },
+ "/api/activity/fto/3": [],
+ "/api/activity/fto/4": [
+  {
+   "id": 22,
+   "org_id": 1,
+   "ticket_type": "fto",
+   "ticket_id": 4,
+   "kind": "status_change",
+   "actor_type": "user",
+   "actor_id": 1,
+   "body": "Status changed from new to in_progress",
+   "metadata": {},
+   "created_at": "2026-07-16T20:31:17.251222-04:00"
+  }
+ ],
+ "/api/activity/fto/2": [],
+ "/api/activity/fto/5": [],
+ "/api/activity/fto/1": [
+  {
+   "id": 21,
+   "org_id": 1,
+   "ticket_type": "fto",
+   "ticket_id": 1,
+   "kind": "created",
+   "actor_type": "system",
+   "body": "Field visit scheduled to meet Dolce Plumbing on-site",
+   "metadata": {},
+   "created_at": "2026-07-12T16:31:17.251222-04:00"
+  }
+ ],
+ "/api/activity/task/5": [],
+ "/api/activity/task/3": [],
+ "/api/activity/task/2": [],
+ "/api/activity/task/4": [],
+ "/api/activity/task/1": [],
+ "/api/activity/task/6": [],
+ "/api/activity/task/9": [],
+ "/api/activity/task/8": [],
+ "/api/activity/task/7": [],
+ "/api/schedule": [
+  {
+   "kind": "work_order",
+   "id": 1,
+   "name": "Ceiling Leak Repair - Unit 2B",
+   "property_id": 1,
+   "property_name": "Maple Court Apartments",
+   "status": "dispatched",
+   "priority": "urgent",
+   "category": "plumbing",
+   "vendor_name": "Dolce Plumbing",
+   "start_at": "2026-07-18T08:00:00-04:00",
+   "end_at": "2026-07-18T10:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "work_order",
+   "id": 4,
+   "name": "Lobby RTU Repair",
+   "property_id": 4,
+   "property_name": "Birchwood Commons",
+   "status": "dispatched",
+   "priority": "high",
+   "category": "hvac",
+   "vendor_name": "Coastal HVAC Services",
+   "start_at": "2026-07-20T13:00:00-04:00",
+   "end_at": "2026-07-20T15:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "work_order",
+   "id": 8,
+   "name": "Irrigation Spring Startup",
+   "property_id": 2,
+   "property_name": "Oak Ridge Townhomes",
+   "status": "completed",
+   "priority": "medium",
+   "category": "landscaping",
+   "vendor_name": "Evergreen Landscaping Co",
+   "start_at": "2026-07-11T08:00:00-04:00",
+   "end_at": "2026-07-11T11:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "work_order",
+   "id": 6,
+   "name": "Gutter Clearing & Realignment",
+   "property_id": 6,
+   "property_name": "Ridgeline Residences",
+   "status": "scheduled",
+   "priority": "medium",
+   "category": "roofing",
+   "vendor_name": "Summit Roofing & Gutter",
+   "start_at": "2026-07-25T09:00:00-04:00",
+   "end_at": "2026-07-25T12:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "work_order",
+   "id": 7,
+   "name": "Dryer Vent Cleaning - Bldg A",
+   "property_id": 1,
+   "property_name": "Maple Court Apartments",
+   "status": "completed",
+   "priority": "low",
+   "category": "cleaning",
+   "vendor_name": "Sparkle Janitorial",
+   "start_at": "2026-07-08T09:00:00-04:00",
+   "end_at": "2026-07-08T14:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "work_order",
+   "id": 9,
+   "name": "Mailroom Ant Treatment",
+   "property_id": 3,
+   "property_name": "Harborview Lofts",
+   "status": "completed",
+   "priority": "medium",
+   "category": "pest_control",
+   "vendor_name": "Shoreline Pest Solutions",
+   "start_at": "2026-07-13T10:00:00-04:00",
+   "end_at": "2026-07-13T11:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "work_order",
+   "id": 2,
+   "name": "Clubhouse Outlet & Breaker Repair",
+   "property_id": 2,
+   "property_name": "Oak Ridge Townhomes",
+   "status": "sent",
+   "priority": "high",
+   "category": "electrical",
+   "start_at": "2026-07-21T00:00:00-04:00",
+   "date_source": "due"
+  },
+  {
+   "kind": "work_order",
+   "id": 3,
+   "name": "Boiler Pressure Diagnosis",
+   "property_id": 3,
+   "property_name": "Harborview Lofts",
+   "status": "sent",
+   "priority": "high",
+   "category": "plumbing",
+   "start_at": "2026-07-20T00:00:00-04:00",
+   "date_source": "due"
+  },
+  {
+   "kind": "work_order",
+   "id": 5,
+   "name": "Corridor Lighting Repair - 3rd Fl",
+   "property_id": 5,
+   "property_name": "The Elm District",
+   "status": "new",
+   "priority": "medium",
+   "category": "electrical",
+   "start_at": "2026-07-23T00:00:00-04:00",
+   "date_source": "due"
+  },
+  {
+   "kind": "fto",
+   "id": 1,
+   "name": "Meet Dolce Plumbing on-site - Unit 2B",
+   "property_id": 1,
+   "property_name": "Maple Court Apartments",
+   "status": "scheduled",
+   "priority": "urgent",
+   "start_at": "2026-07-18T08:00:00-04:00",
+   "end_at": "2026-07-18T10:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "fto",
+   "id": 4,
+   "name": "Boiler room check - daily log",
+   "property_id": 3,
+   "property_name": "Harborview Lofts",
+   "status": "in_progress",
+   "priority": "high",
+   "start_at": "2026-07-17T09:00:00-04:00",
+   "end_at": "2026-07-17T09:30:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "fto",
+   "id": 5,
+   "name": "Mailroom follow-up inspection",
+   "property_id": 3,
+   "property_name": "Harborview Lofts",
+   "status": "scheduled",
+   "priority": "low",
+   "start_at": "2026-07-27T10:00:00-04:00",
+   "end_at": "2026-07-27T10:30:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "fto",
+   "id": 2,
+   "name": "Roof access for Coastal HVAC",
+   "property_id": 4,
+   "property_name": "Birchwood Commons",
+   "status": "scheduled",
+   "priority": "high",
+   "start_at": "2026-07-20T13:00:00-04:00",
+   "end_at": "2026-07-20T15:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "fto",
+   "id": 3,
+   "name": "Corridor lighting walkthrough",
+   "property_id": 5,
+   "property_name": "The Elm District",
+   "status": "new",
+   "priority": "medium",
+   "start_at": "2026-07-19T09:00:00-04:00",
+   "end_at": "2026-07-19T10:00:00-04:00",
+   "date_source": "event"
+  },
+  {
+   "kind": "recurring",
+   "id": 3,
+   "name": "Weekly Landscaping Visit",
+   "property_id": 6,
+   "property_name": "Ridgeline Residences",
+   "status": "scheduled",
+   "priority": "low",
+   "category": "landscaping",
+   "start_at": "2026-07-22T00:00:00-04:00",
+   "date_source": "next_run"
+  },
+  {
+   "kind": "recurring",
+   "id": 1,
+   "name": "Monthly Common-Area Deep Clean",
+   "property_id": 1,
+   "property_name": "Maple Court Apartments",
+   "status": "scheduled",
+   "priority": "medium",
+   "category": "cleaning",
+   "start_at": "2026-07-29T00:00:00-04:00",
+   "date_source": "next_run"
+  },
+  {
+   "kind": "recurring",
+   "id": 2,
+   "name": "Quarterly HVAC Filter Swap",
+   "property_id": 4,
+   "property_name": "Birchwood Commons",
+   "status": "scheduled",
+   "priority": "medium",
+   "category": "hvac",
+   "start_at": "2026-08-04T00:00:00-04:00",
+   "date_source": "next_run"
+  },
+  {
+   "kind": "recurring",
+   "id": 4,
+   "name": "Annual Backflow Test",
+   "property_id": 3,
+   "property_name": "Harborview Lofts",
+   "status": "scheduled",
+   "priority": "high",
+   "category": "plumbing",
+   "start_at": "2026-08-11T00:00:00-04:00",
+   "date_source": "next_run"
+  }
+ ],
+ "__login": {
+  "org_id": 1,
+  "org_name": "Demo Property Management",
+  "email": "demo@maintenancehub.test",
+  "role": "admin"
+ }
+}
