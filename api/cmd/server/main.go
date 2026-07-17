@@ -34,6 +34,7 @@ import (
 	woservice "maintenancehub/modules/maintenance/work_order/service"
 	"maintenancehub/modules/orgs"
 	"maintenancehub/modules/properties"
+	"maintenancehub/modules/schedule"
 	"maintenancehub/modules/sms"
 	"maintenancehub/modules/vendors"
 	"maintenancehub/modules/vendors/outreach"
@@ -162,6 +163,7 @@ func main() {
 		r.Mount("/api/recurring", recurringhttp.Routes(pool, recorder))
 		r.Mount("/api/outreach", outreach.Routes(outreachSvc, outreachRepo))
 		r.Mount("/api/activity", activity.Routes(recorder))
+		r.Mount("/api/schedule", schedule.Routes(pool))
 		r.Mount("/api/sms-admin", sms.Routes(smsSvc, smsRepo))
 		r.Mount("/api/calendar", calendar.Routes(calSvc))
 	})

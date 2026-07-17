@@ -12,9 +12,11 @@ import (
 	"maintenancehub/middleware"
 )
 
-// Routes (authenticated): trigger + inspect + dispatch, keyed by work order.
+// Routes (authenticated): trigger + inspect + dispatch, keyed by work order,
+// plus the org-wide /all listing.
 func Routes(svc *Service, repo *Repo) chi.Router {
 	r := chi.NewRouter()
+	AllRoutes(r, repo, svc.db)
 
 	// Preview the shortlist without sending anything.
 	r.Get("/work-orders/{woID}/shortlist", func(w http.ResponseWriter, req *http.Request) {
