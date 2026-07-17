@@ -44,3 +44,28 @@ because vendor outreach shortlists by trade.
 one). In this product the vendor is chosen AFTER approval via vendor outreach + dispatch — a
 work order starts vendor-less by design.
 
+
+## 2026-07-17 — Twilio credentials on this machine are stale (401) → SMS sends implemented-but-unverified
+
+**Decided:** The only Twilio credentials on this machine (ra-avm's `api/.env`) fail
+authentication — the auth token has evidently been rotated since that file was written (SID/token
+have the correct shape; Twilio returns 401 code 20003 on a read-only account GET). No other
+Twilio, SendGrid, or SMTP credentials exist in the environment. Therefore, exactly as
+TECHNICAL_PLAN.md's "Outbound messaging credentials" section prescribes: the outreach pipeline is
+built against the `OutreachSender`-style comms interface, the REAL Twilio-backed implementation
+is wired in and is the default, and the actual over-the-network send/reply is left
+implemented-but-unverified rather than blocking the build.
+**What was verified instead:** (a) the Anthropic key works — classification runs against the
+real API; (b) the full inbound path is exercised by POSTing Twilio's exact webhook wire format
+(form-encoded, AccountSid validation) to our public webhook — identical code path from the
+network edge inward; (c) outbound requests are persisted with per-request status/error, so the
+Twilio 401 is visible in the audit trail rather than swallowed.
+**Also decided:** Added `OUTREACH_SIMULATE=1` dev flag: marks outreach requests "sent" without
+calling Twilio so the demo/dashboard isn't full of failed rows while credentials are absent. The
+flag is OFF by default; with real credentials present, no code change is needed — set the env
+vars and the real sender runs.
+**To complete verification later:** put a valid TWILIO_AUTH_TOKEN (+ account SID/number) in
+`api/.env`, set an org's twilio_phone_number, expose `POST /api/sms/webhook` publicly (e.g.
+ngrok) or rely on API polling, and re-run the outreach step. No rebuild needed.
+**Rejected:** Buying/using a different Twilio account autonomously (no credentials to do so);
+pointing AVMRE's production number's webhook at this project (must not disturb their prod).

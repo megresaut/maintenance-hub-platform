@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -212,13 +213,13 @@ func (s *Service) Trigger(ctx context.Context, orgID, workOrderID, actorID int64
 	}
 
 	if len(out) > 0 {
-		// Move the work order into sourcing once outreach is out the door.
+		// Move the work order to 'sent' (sourcing) once outreach is out the door.
 		_, err := s.db.Exec(ctx, `
-			UPDATE work_orders SET status = 'sourcing'
-			WHERE id = $1 AND org_id = $2 AND status IN ('new', 'proposed')`,
+			UPDATE work_orders SET status = 'sent'
+			WHERE id = $1 AND org_id = $2 AND status = 'new'`,
 			workOrderID, orgID)
 		if err != nil {
-			log.Printf("[outreach] failed to set work order %d to sourcing: %v", workOrderID, err)
+			log.Printf("[outreach] failed to set work order %d to sent: %v", workOrderID, err)
 		}
 
 		names := make([]string, 0, len(out))
@@ -251,6 +252,18 @@ func (s *Service) sendOne(ctx context.Context, orgID int64, org *orgInfo, wo *wo
 	}
 	if _, err := s.repo.CreateRequest(ctx, req); err != nil {
 		return nil, err
+	}
+
+	// OUTREACH_SIMULATE=1: dev flag for demos without messaging credentials —
+	// the request is recorded and marked sent, but no provider is called.
+	// Real Twilio/SMTP sending is the default path.
+	if os.Getenv("OUTREACH_SIMULATE") == "1" {
+		req.Status = StatusSent
+		if err := s.repo.MarkSent(ctx, req.ID, "simulated"); err != nil {
+			log.Printf("[outreach] failed to mark request %d sent: %v", req.ID, err)
+		}
+		log.Printf("[outreach] SIMULATED %s to vendor %d (%s) at %s for WO-%d", channel, v.ID, v.Name, to, wo.ID)
+		return req, nil
 	}
 
 	var providerRef string
