@@ -1,5 +1,9 @@
 # Maintenance Hub
 
+**Live demo:** https://maintenance-hub-pi.vercel.app (login `demo@maintenancehub.test` / `demo1234`)
+— read-only snapshot; the interactive pipeline (AI intake, outreach, dispatch) runs locally per below.
+**Repo:** https://github.com/megresaut/maintenance-hub-platform
+
 A standalone MVP for property-management maintenance operations: ticket intake
 (manual / SMS / Outlook), AI classification into a review queue, vendor sourcing
 & outreach (SMS/email quote requests with replies routed back into the ticket
