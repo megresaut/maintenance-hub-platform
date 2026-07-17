@@ -69,3 +69,23 @@ vars and the real sender runs.
 ngrok) or rely on API polling, and re-run the outreach step. No rebuild needed.
 **Rejected:** Buying/using a different Twilio account autonomously (no credentials to do so);
 pointing AVMRE's production number's webhook at this project (must not disturb their prod).
+
+## 2026-07-17 — Outlook calendar: ported + wired, not verified against a live tenant
+
+**Decided:** The calendar module (per-org Graph connections, delta sync, webhook subscriptions,
+classification handoff into the drafts queue) is fully ported and wired, and its admin/config
+endpoints are smoke-tested — but no live Microsoft 365 tenant was connected during the build.
+**Why:** SMS was chosen as the verified intake channel per FEATURE_PLAN.md ("pick SMS or
+Outlook as the second one to verify end-to-end, whichever is faster"). Connecting Outlook would
+have required either reusing AVMRE's production mailbox (reads another company's live calendar —
+rejected) or a new Azure app registration + admin consent, which cannot be provisioned
+autonomously. Graph webhooks additionally need a public HTTPS URL.
+**To verify later:** create an Azure app with Calendars.ReadWrite application permission,
+`PUT /api/calendar/connection` with its tenant/client/secret + mailbox, set
+`CALENDAR_WEBHOOK_URL`, then `POST /api/calendar/subscription/ensure` and `POST /api/calendar/delta-sync`.
+
+## 2026-07-17 — Demo pacing defaults
+
+**Decided:** SMS classification gap/poll made env-configurable (`SMS_CLASSIFY_GAP_SECONDS`,
+`SMS_POLL_INTERVAL_SECONDS`); the source hardcoded 5min/2min, which is right for production but
+makes a live demo (and E2E script) painfully slow. Demo .env uses 5s/5s.
