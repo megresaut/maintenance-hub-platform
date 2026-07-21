@@ -40,23 +40,35 @@ import (
 	"maintenancehub/modules/vendors/outreach"
 )
 
-func withCORS(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		origin := r.Header.Get("Origin")
-		allowed := strings.HasPrefix(origin, "http://localhost:5175") ||
-			strings.HasPrefix(origin, "http://127.0.0.1:5175")
-		if allowed {
-			w.Header().Set("Access-Control-Allow-Origin", origin)
-			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
-			w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type")
-			w.Header().Set("Access-Control-Allow-Credentials", "true")
+// corsMiddleware allows the two local dev origins plus any exact origins listed
+// in the CORS_ORIGINS env var (comma-separated, e.g. the deployed web URL).
+func corsMiddleware(configured string) func(http.Handler) http.Handler {
+	allow := map[string]bool{
+		"http://localhost:5175": true,
+		"http://127.0.0.1:5175": true,
+	}
+	for _, o := range strings.Split(configured, ",") {
+		if o = strings.TrimSpace(o); o != "" {
+			allow[o] = true
 		}
-		if r.Method == http.MethodOptions {
-			w.WriteHeader(http.StatusNoContent)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
+	}
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			origin := r.Header.Get("Origin")
+			if origin != "" && allow[origin] {
+				w.Header().Set("Access-Control-Allow-Origin", origin)
+				w.Header().Set("Vary", "Origin")
+				w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
+				w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type")
+				w.Header().Set("Access-Control-Allow-Credentials", "true")
+			}
+			if r.Method == http.MethodOptions {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
 }
 
 func main() {
@@ -81,17 +93,25 @@ func main() {
 	smtp := comms.NewSMTPClient(os.Getenv("SMTP_HOST"), config.Get("SMTP_PORT", "587"),
 		os.Getenv("SMTP_USERNAME"), os.Getenv("SMTP_PASSWORD"))
 
-	// --- AI classification ---
-	var anthropic *aiclient.Client
-	if key := os.Getenv("ANTHROPIC_API_KEY"); key != "" {
-		anthropic = aiclient.New(key)
-	} else {
-		log.Printf("WARNING: ANTHROPIC_API_KEY not set — AI classification and quote parsing disabled")
+	// --- AI classification (OpenRouter preferred when configured; else Anthropic) ---
+	var aiClient *aiclient.Client
+	var aiModel string
+	switch {
+	case os.Getenv("OPENROUTER_API_KEY") != "":
+		aiModel = config.Get("OPENROUTER_MODEL", config.Get("AI_MODEL", "google/gemini-2.5-flash-lite"))
+		aiClient = aiclient.NewOpenRouter(os.Getenv("OPENROUTER_API_KEY"), aiModel)
+		log.Printf("AI provider: OpenRouter (model %s)", aiModel)
+	case os.Getenv("ANTHROPIC_API_KEY") != "":
+		aiModel = config.Get("AI_MODEL", "claude-haiku-4-5-20251001")
+		aiClient = aiclient.New(os.Getenv("ANTHROPIC_API_KEY"))
+		log.Printf("AI provider: Anthropic (model %s)", aiModel)
+	default:
+		log.Printf("WARNING: no AI key (OPENROUTER_API_KEY or ANTHROPIC_API_KEY) set — AI classification and quote parsing disabled")
 	}
 	contextLoader := aiservice.NewContextLoader(pool)
 	var classifier *aiservice.AIClassifier
-	if anthropic != nil {
-		classifier = aiservice.NewAIClassifier(anthropic, contextLoader)
+	if aiClient != nil {
+		classifier = aiservice.NewAIClassifier(aiClient, contextLoader)
 	}
 
 	// --- maintenance services (also used by the drafts adapter) ---
@@ -108,7 +128,7 @@ func main() {
 	// --- vendors + outreach (flagship) ---
 	vendorRepo := vendors.NewRepo(pool)
 	outreachRepo := outreach.NewRepo(pool)
-	outreachSvc := outreach.NewService(pool, outreachRepo, vendorRepo, twilio, smtp, anthropic, recorder)
+	outreachSvc := outreach.NewService(pool, outreachRepo, vendorRepo, twilio, smtp, aiClient, recorder)
 
 	// --- SMS intake ---
 	smsRepo := sms.NewRepo(pool)
@@ -124,7 +144,7 @@ func main() {
 	if classifier != nil {
 		draftCreator = &calendarDraftCreator{
 			classifier: classifier, draftSvc: draftSvc,
-			model: config.Get("AI_MODEL", "claude-haiku-4-5-20251001"),
+			model: aiModel,
 		}
 	}
 	calSvc := calendar.NewService(pool, config.Get("CALENDAR_WEBHOOK_URL", ""), draftCreator)
@@ -136,7 +156,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(chimw.Logger)
 	r.Use(chimw.Recoverer)
-	r.Use(withCORS)
+	r.Use(corsMiddleware(config.Get("CORS_ORIGINS", "")))
 
 	r.Get("/healthz", func(w http.ResponseWriter, _ *http.Request) {
 		w.Write([]byte("ok"))

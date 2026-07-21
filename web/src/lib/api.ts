@@ -45,6 +45,11 @@ export class ApiError extends Error {
 // demo credentials.
 export const DEMO = import.meta.env.VITE_DEMO === '1'
 
+// In dev, requests are relative ('/api/...') and the Vite proxy forwards them to
+// :8091. In production the web app and Go API are on different origins, so set
+// VITE_API_URL to the deployed API origin (no trailing slash) at build time.
+const API_BASE = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '')
+
 async function demoApi<T>(path: string, opts: RequestInit = {}): Promise<T> {
   const { default: fixtures } = await import('../demo/fixtures.json')
   const fx = fixtures as Record<string, unknown>
@@ -80,7 +85,7 @@ export async function api<T>(path: string, opts: RequestInit = {}): Promise<T> {
   }
   if (token) headers['Authorization'] = `Bearer ${token}`
 
-  const res = await fetch(path, { ...opts, headers })
+  const res = await fetch(API_BASE + path, { ...opts, headers })
   if (res.status === 401) {
     setSession(null)
     window.location.href = '/login'

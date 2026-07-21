@@ -2,6 +2,7 @@ package vendors
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 
@@ -148,7 +149,7 @@ func (r *Repo) LookupLocal(ctx context.Context, orgID int64, category string, ar
 func (r *Repo) ListPreferred(ctx context.Context, orgID, propertyID int64, category string) ([]*Vendor, error) {
 	q := `SELECT ` + qualVendorCols("v") + `
 	      FROM preferred_vendors pv
-	      JOIN vendors v ON v.id = pv.vendor_id
+	      JOIN vendors v ON v.id = pv.vendor_id AND v.org_id = pv.org_id
 	      WHERE pv.org_id = $1 AND pv.property_id = $2 AND pv.category = $3
 	      ORDER BY pv.priority, v.name`
 	rows, err := r.db.Query(ctx, q, orgID, propertyID, normalizeCategory(category))
@@ -171,8 +172,8 @@ func (r *Repo) ListPreferredEntries(ctx context.Context, orgID int64) ([]*Prefer
 	q := `SELECT pv.id, pv.org_id, pv.property_id, pv.category, pv.vendor_id, pv.priority,
 	             pv.created_at, v.name, p.name
 	      FROM preferred_vendors pv
-	      JOIN vendors v ON v.id = pv.vendor_id
-	      JOIN properties p ON p.id = pv.property_id
+	      JOIN vendors v ON v.id = pv.vendor_id AND v.org_id = pv.org_id
+	      JOIN properties p ON p.id = pv.property_id AND p.org_id = pv.org_id
 	      WHERE pv.org_id = $1
 	      ORDER BY p.name, pv.category, pv.priority`
 	rows, err := r.db.Query(ctx, q, orgID)
@@ -192,16 +193,29 @@ func (r *Repo) ListPreferredEntries(ctx context.Context, orgID int64) ([]*Prefer
 	return out, rows.Err()
 }
 
+// ErrCrossOrgReference is returned when a write references a vendor or property
+// that does not belong to the caller's org — the enabling condition for the
+// preferred-vendor cross-tenant leak, rejected here at write time.
+var ErrCrossOrgReference = errors.New("vendor or property not found in your organization")
+
 func (r *Repo) AddPreferred(ctx context.Context, orgID int64, propertyID int64, category string, vendorID int64, priority int) (*PreferredVendor, error) {
+	// INSERT ... SELECT guarded by EXISTS: the row is only created if BOTH the
+	// vendor and the property are owned by orgID. A cross-org id produces no
+	// source row → no insert → ErrNoRows, which we surface as ErrCrossOrgReference.
 	var pv PreferredVendor
 	err := r.db.QueryRow(ctx, `
 		INSERT INTO preferred_vendors (org_id, property_id, category, vendor_id, priority)
-		VALUES ($1, $2, $3, $4, $5)
+		SELECT $1, $2, $3, $4, $5
+		WHERE EXISTS (SELECT 1 FROM vendors    WHERE id = $4 AND org_id = $1)
+		  AND EXISTS (SELECT 1 FROM properties WHERE id = $2 AND org_id = $1)
 		ON CONFLICT (org_id, property_id, category, vendor_id)
 		DO UPDATE SET priority = $5
 		RETURNING id, org_id, property_id, category, vendor_id, priority, created_at`,
 		orgID, propertyID, normalizeCategory(category), vendorID, priority,
 	).Scan(&pv.ID, &pv.OrgID, &pv.PropertyID, &pv.Category, &pv.VendorID, &pv.Priority, &pv.CreatedAt)
+	if errors.Is(err, pgx.ErrNoRows) {
+		return nil, ErrCrossOrgReference
+	}
 	if err != nil {
 		return nil, err
 	}

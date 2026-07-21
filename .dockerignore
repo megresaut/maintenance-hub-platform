@@ -1,0 +1,12 @@
+# Keep the build context small — only api/ and migrations/ are needed.
+web/
+docs/
+scripts/
+.git/
+*.md
+**/node_modules/
+**/dist/
+api/bin/
+**/.env
+*.log
+.DS_Store

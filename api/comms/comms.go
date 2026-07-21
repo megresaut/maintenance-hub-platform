@@ -5,13 +5,18 @@ package comms
 
 import (
 	"context"
+	"crypto/hmac"
+	"crypto/sha1"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"net/smtp"
 	"net/url"
+	"os"
 	"regexp"
+	"sort"
 	"strings"
 )
 
@@ -73,14 +78,83 @@ func (c *TwilioClient) SendSMS(ctx context.Context, from, to, body string) (stri
 	return parsed.SID, nil
 }
 
-// ValidateWebhook does basic authenticity checking of an inbound Twilio
-// webhook by matching AccountSid. (Full X-Twilio-Signature HMAC validation
-// is a production hardening item, same as in the source.)
+// ValidateWebhook authenticates an inbound Twilio webhook. It always requires
+// the AccountSid to match, and — when an auth token is configured — verifies
+// the full X-Twilio-Signature HMAC (Twilio's scheme: HMAC-SHA1 over the request
+// URL followed by the POST params sorted by key, keyed by the auth token).
+//
+// Local escape hatches: with no auth token (dev / OUTREACH_SIMULATE we can't
+// compute the HMAC) or with TWILIO_SKIP_SIGNATURE_VALIDATION set, it falls back
+// to the AccountSid check so the e2e harness works without real signatures.
+// Production (Render) sets neither, so the signature is enforced.
 func (c *TwilioClient) ValidateWebhook(r *http.Request) bool {
 	if err := r.ParseForm(); err != nil {
 		return false
 	}
-	return r.FormValue("AccountSid") == c.accountSID
+	if r.FormValue("AccountSid") != c.accountSID {
+		return false
+	}
+	if c.authToken == "" || isTruthy(os.Getenv("TWILIO_SKIP_SIGNATURE_VALIDATION")) {
+		return true
+	}
+	sig := r.Header.Get("X-Twilio-Signature")
+	if sig == "" {
+		return false
+	}
+	return c.validSignature(r, sig)
+}
+
+// validSignature recomputes Twilio's HMAC-SHA1 signature and compares it to the
+// provided X-Twilio-Signature in constant time.
+func (c *TwilioClient) validSignature(r *http.Request, provided string) bool {
+	var b strings.Builder
+	b.WriteString(c.webhookURL(r))
+
+	keys := make([]string, 0, len(r.PostForm))
+	for k := range r.PostForm {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		b.WriteString(k)
+		b.WriteString(r.PostForm.Get(k))
+	}
+
+	mac := hmac.New(sha1.New, []byte(c.authToken))
+	mac.Write([]byte(b.String()))
+	expected := base64.StdEncoding.EncodeToString(mac.Sum(nil))
+	return hmac.Equal([]byte(expected), []byte(provided))
+}
+
+// webhookURL reconstructs the public URL Twilio signed. Behind a TLS-terminating
+// proxy (Render) the internal request looks like plain HTTP, so trust the
+// X-Forwarded-* headers; TWILIO_WEBHOOK_BASE_URL overrides both if a proxy
+// rewrites host/proto in a way that breaks the match.
+func (c *TwilioClient) webhookURL(r *http.Request) string {
+	if base := os.Getenv("TWILIO_WEBHOOK_BASE_URL"); base != "" {
+		return strings.TrimRight(base, "/") + r.URL.RequestURI()
+	}
+	scheme := r.Header.Get("X-Forwarded-Proto")
+	if scheme == "" {
+		if r.TLS != nil {
+			scheme = "https"
+		} else {
+			scheme = "http"
+		}
+	}
+	host := r.Header.Get("X-Forwarded-Host")
+	if host == "" {
+		host = r.Host
+	}
+	return scheme + "://" + host + r.URL.RequestURI()
+}
+
+func isTruthy(v string) bool {
+	switch strings.ToLower(strings.TrimSpace(v)) {
+	case "1", "true", "yes", "on":
+		return true
+	}
+	return false
 }
 
 var nonDigit = regexp.MustCompile(`[^0-9]`)

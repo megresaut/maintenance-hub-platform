@@ -53,8 +53,13 @@ scripts/verify_e2e.sh
 |---|---|
 | `DATABASE_URL` | e.g. `postgres://<user>@localhost:5432/maintenance_hub_local` |
 | `JWT_SECRET` | ≥32 chars |
-| `ANTHROPIC_API_KEY` | AI classification + quote parsing |
-| `AI_MODEL` | optional, default `claude-haiku-4-5-20251001` |
+| `OPENROUTER_API_KEY` | AI provider (preferred) — OpenRouter, OpenAI-compatible |
+| `OPENROUTER_MODEL` | OpenRouter model slug, default `google/gemini-2.5-flash-lite` |
+| `ANTHROPIC_API_KEY` | AI fallback — used only if `OPENROUTER_API_KEY` is unset |
+| `AI_MODEL` | Anthropic model, default `claude-haiku-4-5-20251001` |
+| `CORS_ORIGINS` | comma-separated exact web origins allowed to call the API (prod); localhost dev origins always allowed |
+| `PORT` | optional, API listen port (default `8091`; hosts inject this) |
+| `MIGRATIONS_DIR` | optional, migrations path (default `../migrations`; Docker image sets `/app/migrations`) |
 | `TWILIO_ACCOUNT_SID` / `TWILIO_AUTH_TOKEN` | platform Twilio credentials |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USERNAME` / `SMTP_PASSWORD` | email outreach |
 | `OUTREACH_SIMULATE` | `1` = record outreach sends without calling providers (demo w/o creds) |
@@ -64,6 +69,23 @@ scripts/verify_e2e.sh
 Per-org settings (via provision CLI or SQL): `organizations.twilio_phone_number`
 (the org's SMS number for intake + outreach), `organizations.outreach_email_from`.
 Outlook connections are configured per org in the app (`PUT /api/calendar/connection`).
+
+## Deploy (beta)
+
+The hosted **API + Postgres** run on Render via `render.yaml` (Docker build from the
+repo-root `Dockerfile`); the **web app** stays on Vercel.
+
+1. **API + DB:** Render dashboard → New → Blueprint → point at this repo. Migrations
+   run on boot. Fill the `sync: false` secrets in the dashboard (`ANTHROPIC_API_KEY`,
+   `CORS_ORIGINS`, Twilio/SMTP). `OUTREACH_SIMULATE=1` is kept on until real creds land.
+2. **Provision each customer org** (no self-serve signup) — run the provision CLI once
+   per org against the prod `DATABASE_URL` (Render shell or locally):
+   `go run ./cmd/provision -org "..." -email ... -password ... -name ... -twilio "+1..."`
+3. **Web:** on Vercel set `VITE_API_URL` to the Render API URL (no trailing slash) and
+   ensure `VITE_DEMO` is **unset** (the `VITE_DEMO=1` build is the read-only snapshot).
+   Add the Vercel web URL to the API's `CORS_ORIGINS`.
+4. Each org needs its own Twilio number (intake resolves the org by receiving number);
+   point that number's inbound webhook at `POST /api/sms/webhook`.
 
 ## Webhooks (production)
 

@@ -77,8 +77,8 @@ func load(ctx context.Context, db *pgxpool.Pool, orgID int64, from, to time.Time
 		            WHEN w.due_date IS NOT NULL THEN 'due'
 		            ELSE 'dispatch' END
 		FROM work_orders w
-		LEFT JOIN properties p ON p.id = w.property_id
-		LEFT JOIN vendors v ON v.id = w.vendor_id
+		LEFT JOIN properties p ON p.id = w.property_id AND p.org_id = w.org_id
+		LEFT JOIN vendors v ON v.id = w.vendor_id AND v.org_id = w.org_id
 		WHERE w.org_id = $1
 		  AND COALESCE(w.event_start_at, w.due_date, w.dispatched_at) >= $2
 		  AND COALESCE(w.event_start_at, w.due_date, w.dispatched_at) < $3
@@ -109,7 +109,7 @@ func load(ctx context.Context, db *pgxpool.Pool, orgID int64, from, to time.Time
 		            WHEN f.due_date IS NOT NULL THEN 'due'
 		            ELSE 'dispatch' END
 		FROM field_team_orders f
-		LEFT JOIN properties p ON p.id = f.property_id
+		LEFT JOIN properties p ON p.id = f.property_id AND p.org_id = f.org_id
 		WHERE f.org_id = $1
 		  AND COALESCE(f.event_start_at, f.due_date, f.dispatched_at) >= $2
 		  AND COALESCE(f.event_start_at, f.due_date, f.dispatched_at) < $3
@@ -136,7 +136,7 @@ func load(ctx context.Context, db *pgxpool.Pool, orgID int64, from, to time.Time
 		SELECT r.id, r.name, r.property_id, COALESCE(p.name,''), r.priority,
 		       COALESCE(r.category,''), r.next_run_at
 		FROM recurring_task_series r
-		LEFT JOIN properties p ON p.id = r.property_id
+		LEFT JOIN properties p ON p.id = r.property_id AND p.org_id = r.org_id
 		WHERE r.org_id = $1 AND r.active
 		  AND r.next_run_at >= $2 AND r.next_run_at < $3`, orgID, from, to)
 	if err != nil {

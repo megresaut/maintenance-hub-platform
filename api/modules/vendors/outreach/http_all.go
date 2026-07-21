@@ -31,9 +31,9 @@ func AllRoutes(r chi.Router, repo *Repo, db *pgxpool.Pool) {
 			SELECT `+reqCols+`, v.name, v.phone, v.primary_email,
 			       wo.name, wo.status, COALESCE(wo.category,''), COALESCE(p.name,'')
 			FROM vendor_outreach_requests r
-			JOIN vendors v ON v.id = r.vendor_id
-			JOIN work_orders wo ON wo.id = r.work_order_id
-			LEFT JOIN properties p ON p.id = wo.property_id
+			JOIN vendors v ON v.id = r.vendor_id AND v.org_id = r.org_id
+			JOIN work_orders wo ON wo.id = r.work_order_id AND wo.org_id = r.org_id
+			LEFT JOIN properties p ON p.id = wo.property_id AND p.org_id = wo.org_id
 			WHERE r.org_id = $1
 			ORDER BY r.created_at DESC
 			LIMIT 500`, orgID)

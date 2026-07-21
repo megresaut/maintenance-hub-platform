@@ -71,7 +71,7 @@ func (r *Repo) SetStatus(ctx context.Context, orgID, id int64, status RequestSta
 func (r *Repo) ListForWorkOrder(ctx context.Context, orgID, workOrderID int64) ([]*Request, error) {
 	q := `SELECT ` + reqCols + `, v.name, v.phone, v.primary_email
 	      FROM vendor_outreach_requests r
-	      JOIN vendors v ON v.id = r.vendor_id
+	      JOIN vendors v ON v.id = r.vendor_id AND v.org_id = r.org_id
 	      WHERE r.org_id = $1 AND r.work_order_id = $2
 	      ORDER BY r.created_at`
 	rows, err := r.db.Query(ctx, q, orgID, workOrderID)
@@ -166,7 +166,7 @@ func (r *Repo) GetReply(ctx context.Context, orgID, replyID int64) (*Reply, *Req
 func (r *Repo) FindOpenRequestByVendorPhone(ctx context.Context, orgID int64, phone string) (*Request, error) {
 	q := `SELECT ` + reqCols + `
 	      FROM vendor_outreach_requests r
-	      JOIN vendors v ON v.id = r.vendor_id
+	      JOIN vendors v ON v.id = r.vendor_id AND v.org_id = r.org_id
 	      WHERE r.org_id = $1
 	        AND r.status IN ('sent', 'replied')
 	        AND (
@@ -188,7 +188,7 @@ func (r *Repo) FindOpenRequestByVendorPhone(ctx context.Context, orgID int64, ph
 func (r *Repo) FindOpenRequestByVendorEmail(ctx context.Context, orgID int64, email string) (*Request, error) {
 	q := `SELECT ` + reqCols + `
 	      FROM vendor_outreach_requests r
-	      JOIN vendors v ON v.id = r.vendor_id
+	      JOIN vendors v ON v.id = r.vendor_id AND v.org_id = r.org_id
 	      WHERE r.org_id = $1
 	        AND r.status IN ('sent', 'replied')
 	        AND (LOWER(COALESCE(v.primary_email,'')) = LOWER($2)

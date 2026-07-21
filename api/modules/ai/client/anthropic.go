@@ -20,6 +20,10 @@ import (
 type Client struct {
 	client anthropic.Client
 	model  anthropic.Model
+
+	// When set, Ask routes to OpenRouter's OpenAI-compatible endpoint instead of
+	// the Anthropic SDK. See openrouter.go.
+	openrouter *openRouterConfig
 }
 
 func New(apiKey string) *Client {
@@ -56,6 +60,9 @@ func (c *Client) ClassifySMS(ctx context.Context, systemPrompt, userPrompt strin
 // Ask sends a system+user prompt and returns the raw text response — used
 // for free-form tasks like vendor-reply quote extraction.
 func (c *Client) Ask(ctx context.Context, systemPrompt, userPrompt string) (string, error) {
+	if c.openrouter != nil {
+		return c.askOpenRouter(ctx, systemPrompt, userPrompt)
+	}
 	resp, err := c.client.Messages.New(ctx, anthropic.MessageNewParams{
 		Model:     c.model,
 		MaxTokens: 2048,

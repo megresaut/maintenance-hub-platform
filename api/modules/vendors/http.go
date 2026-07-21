@@ -1,6 +1,7 @@
 package vendors
 
 import (
+	"errors"
 	"net/http"
 	"strconv"
 	"strings"
@@ -130,6 +131,10 @@ func PreferredRoutes(repo *Repo) chi.Router {
 			in.Priority = 1
 		}
 		pv, err := repo.AddPreferred(req.Context(), orgID, in.PropertyID, in.Category, in.VendorID, in.Priority)
+		if errors.Is(err, ErrCrossOrgReference) {
+			httpx.Error(w, http.StatusBadRequest, err.Error())
+			return
+		}
 		if err != nil {
 			httpx.Error(w, http.StatusInternalServerError, err.Error())
 			return
