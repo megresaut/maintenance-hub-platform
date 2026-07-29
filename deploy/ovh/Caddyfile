@@ -1,0 +1,15 @@
+# Relay internal web tier — HTTP only, no host ports. The Metered edge Caddy
+# terminates TLS and proxies relay.rentatrix.com here. This just serves the SPA
+# and forwards /api/* to the Go API. Health is /healthz on the API (not proxied
+# publicly; checked directly on the container).
+:80 {
+	encode zstd gzip
+	handle /api/* {
+		reverse_proxy relay-app:8091
+	}
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}

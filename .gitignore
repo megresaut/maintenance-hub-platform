@@ -6,3 +6,6 @@ api/bin/
 uploads/
 *.log
 .DS_Store
+
+# OVH co-host deploy secrets
+deploy/ovh/.env.production

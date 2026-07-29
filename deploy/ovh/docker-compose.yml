@@ -1,0 +1,76 @@
+# Relay (maintenance-hub) — co-hosted on the SAME OVH box as Metered.
+#
+# Self-contained stack: its own Postgres + Go API + an internal Caddy that
+# serves the built frontend and proxies /api → the Go API. It binds NO host
+# ports — the Metered edge Caddy (the only thing on :80/:443) terminates TLS for
+# relay.rentatrix.com and reverse-proxies the whole hostname to relay-web over
+# the shared external `edge` docker network.
+#
+#   internet → Metered Caddy (:443, TLS) --edge--> relay-web:80 --relaynet--> relay-app:8091
+#                                                                └ serves web/dist
+#
+# Relay has no RLS and no prod-config gate, so a normal DB role + sslmode=disable
+# on the in-host hop is fine. Usage: ./deploy.sh (see README.md).
+#
+# `name: relay` pins the Compose project so it never collides with Metered's
+# project (both live in a deploy/ovh dir, which would otherwise default both to
+# project "ovh"). Metered stays project "ovh"; Relay is project "relay".
+name: relay
+
+services:
+  relay-db:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mh
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set in .env.production}
+      POSTGRES_DB: maintenance_hub
+    volumes:
+      - relay-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mh -d maintenance_hub"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks: [relaynet]
+
+  relay-app:
+    # CI builds + pushes this image to GHCR; the box `docker compose pull`s it.
+    # `build:` stays as a local-dev fallback.
+    image: ghcr.io/megresaut/relay-api:latest
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      relay-db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://mh:${DB_PASSWORD}@relay-db:5432/maintenance_hub?sslmode=disable
+      JWT_SECRET: ${JWT_SECRET:?set in .env.production}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-google/gemini-2.5-flash-lite}
+      CORS_ORIGINS: https://${DOMAIN:?set in .env.production}
+      # Keep vendor/tenant sends SIMULATED until real Twilio/SMTP creds are added.
+      OUTREACH_SIMULATE: "1"
+      PORT: "8091"
+    expose:
+      - "8091"
+    networks: [relaynet]
+
+  relay-web:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on: [relay-app]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../../web/dist:/srv:ro     # built frontend (deploy.sh runs the build)
+    networks: [relaynet, edge]     # edge = reachable by the Metered edge Caddy
+
+networks:
+  relaynet:
+  edge:
+    external: true               # created once: docker network create edge
+
+volumes:
+  relay-pgdata:
