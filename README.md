@@ -1,96 +1,112 @@
 # Maintenance Hub
 
-**Live demo:** https://maintenance-hub-pi.vercel.app (login `demo@maintenancehub.test` / `demo1234`)
-— read-only snapshot; the interactive pipeline (AI intake, outreach, dispatch) runs locally per below.
-**Repo:** https://github.com/megresaut/maintenance-hub-platform
+**AI maintenance intake and vendor dispatch for property-management firms.**
 
-A standalone MVP for property-management maintenance operations: ticket intake
-(manual / SMS / Outlook), AI classification into a review queue, vendor sourcing
-& outreach (SMS/email quote requests with replies routed back into the ticket
-thread), one-click dispatch, and portfolio-wide tracking.
+**Live demo:** https://maintenance-hub-pi.vercel.app (login `demo@maintenancehub.test` / `demo1234`, read-only snapshot)
 
-**Deliberately out of scope:** any accounting/billing/payments surface — no
-hours/expense logging, no bills, no QuickBooks/Buildium, no CSV export.
-See `TECHNICAL_PLAN.md` / `FEATURE_PLAN.md` (scope) and `DECISIONS.md` (build log).
+A maintenance request comes in by text, calendar, or a manager typing it up. Maintenance Hub then:
+1. turns it into a ticket,
+2. finds the right vendors and asks them for quotes,
+3. collects their replies into the ticket,
+4. lets the property manager dispatch the job in one click.
 
-## Stack
+It works alongside whatever property-management system a firm already uses. It doesn't replace it.
 
-- **API** — Go (chi, pgx/v5, raw SQL), port **8091**
-- **Web** — React + TypeScript + Vite + Tailwind v4, dev port **5175**
-- **DB** — Postgres, database `maintenance_hub_local`
-- **AI** — Anthropic API (classification + vendor-reply quote parsing)
-- **Messaging** — Twilio (SMS intake + outreach), SMTP (email outreach)
+![Work order with vendor quotes side by side](docs/screenshots/workorder.png)
 
-## Run locally
+---
+
+## The problem
+
+At most property-management firms, a maintenance request means a manager re-typing a tenant's text into a ticket. Then they look up which plumber covers that town, text three vendors, and chase replies across their phone and inbox. Finally they compare quotes in their head. Maintenance Hub automates everything except the decision itself.
+
+## How it works
+
+### 1. Intake from three channels
+- **SMS self-service.** A tenant or team member texts the firm's number with a description and photos. They get an automatic confirmation back.
+- **Outlook calendar sync.** Maintenance events on a connected Outlook calendar are picked up automatically.
+- **Manual entry.** A property manager creates a request directly.
+
+All three go through the same pipeline.
+
+### 2. AI classification and a review queue
+AI reads each request and drafts a ticket. The draft includes the task, the trade (plumbing, HVAC, electrical…), and whether the job needs an outside **vendor Work Order**, the internal **field team**, or both. Drafts land in a **Review Queue** showing the AI's confidence and reasoning. A manager approves them (with edits if needed) or rejects them. Nothing becomes a real ticket without a human approving it.
+
+### 3. Vendor sourcing
+For a vendor job, Maintenance Hub builds a shortlist:
+- the property's **preferred vendors** for that trade, if the firm has set them, or
+- a lookup in the firm's vendor directory by **trade and service area**.
+
+The manager can add or remove vendors before anything is sent.
+
+### 4. Automated outreach
+The platform sends each vendor on the shortlist a **text and/or email** about the job: what it is, the property and unit, photos, and a request for availability and a quote. Every message carries a `WO-<id>` reference.
+
+### 5. Replies route back automatically
+Vendor replies (SMS or email) are matched to the right work order by the reference, the vendor's phone, or the vendor's email. They land in that ticket's thread, not the intake queue. AI parses the **quote amount and availability** out of each free-text reply.
+
+### 6. One-click dispatch
+The manager compares the replies side by side and dispatches to one vendor. That records the vendor and quote, moves the work order to `dispatched`, and can notify the vendor. Internal jobs are assigned straight to a field-team member instead.
+
+### 7. Tracking
+- Each ticket has an **activity timeline**: created, approved, outreach sent, replies, dispatch, status changes, and notes.
+- The portfolio **dashboard** and **pipeline board** show every open ticket across properties.
+- The **Outreach Center** shows every pending vendor conversation in one place.
+- The **Calendar** shows upcoming due dates.
+- **Recurring task templates** (daily/weekly/monthly/yearly) create routine maintenance automatically.
+
+## Screens
+
+| | |
+|---|---|
+| Dashboard | Portfolio stats; Work Order / Field Team / Task tables; filters by property, status, search |
+| Review Queue | AI drafts with confidence and reasoning; approve, edit, or reject |
+| Work Order | Shortlist → send outreach → live vendor comparison → dispatch |
+| Pipeline Board | Tickets by stage |
+| Outreach Center | All vendor conversations awaiting reply |
+| Calendar | Upcoming work by due date |
+| Vendors / Preferred Vendors | Directory by trade and service area; preferred lists per property and trade |
+| New Request | Manual intake and SMS conversation viewer |
+
+Screenshots of each are in [`docs/screenshots/`](docs/screenshots/).
+
+## Built for multiple firms
+
+- Each customer firm is a separate **organization** with its own users, properties, vendors, and Twilio number. Inbound texts are routed to the right firm by the number they were sent to.
+- Every query is scoped to the organization.
+- Customer firms are set up by an admin. There's no public self-serve signup.
+
+## Out of scope, on purpose
+
+Maintenance Hub covers operations only. There is **no accounting**: no hours or expense logging, no bills or invoices, no payments, no QuickBooks or Buildium sync. Vendor outreach is text and email only (no AI voice calls). Tenants use SMS rather than a web portal. Billing for utilities is a separate product, [Metered](https://github.com/megresaut/metered-utility-billing).
+
+## Tech
+
+- **API:** Go (chi, pgx/v5, raw SQL), with migrations applied on boot.
+- **Web:** React, TypeScript, Vite, Tailwind v4.
+- **Database:** PostgreSQL.
+- **AI:** OpenRouter (default) or Anthropic, for classification and quote parsing.
+- **Messaging:** Twilio SMS, SMTP email, Microsoft Graph for Outlook.
+- **Hosting:** Docker container with Postgres and Caddy, deployed via GitHub Actions (`deploy/ovh/`). The demo build is on Vercel.
+
+---
+
+## Setup
+
+Requires Go, Node 20+, and PostgreSQL.
 
 ```bash
-# 1. Database (Postgres must be running)
 createdb maintenance_hub_local
+# create api/.env with DATABASE_URL, JWT_SECRET, and OPENROUTER_API_KEY (or ANTHROPIC_API_KEY).
+# Set OUTREACH_SIMULATE=1 to demo without Twilio/SMTP credentials.
 
-# 2. Configure api/.env  (see keys below)
-
-# 3. API — applies migrations on boot
-cd api && go run ./cmd/server
-
-# 4. Provision an org + admin login (no self-serve signup by design)
-cd api && go run ./cmd/provision -org "Demo Property Management" \
-  -email demo@maintenancehub.test -password demo1234 -name "Demo Admin" \
-  -twilio "+15551234567"
-
-# 5. Demo data (2 properties, 4 vendors, preferred list on property 1)
-scripts/seed_demo.sh
-
-# 6. Frontend
-cd web && npm install && npm run dev    # http://localhost:5175
-
-# 7. End-to-end check (SMS intake → drafts → approve → outreach → reply → dispatch)
-scripts/verify_e2e.sh
+cd api && go run ./cmd/server                       # :8091, runs migrations
+go run ./cmd/provision -org "Demo PM" -email demo@maintenancehub.test \
+  -password demo1234 -name "Demo Admin" -twilio "+15551234567"
+cd .. && scripts/seed_demo.sh                       # sample properties and vendors
+cd web && npm install && npm run dev                # http://localhost:5175
 ```
 
-### api/.env keys
+`scripts/verify_e2e.sh` runs the whole flow end to end: SMS → draft → approve → outreach → vendor reply → dispatch.
 
-| Key | Purpose |
-|---|---|
-| `DATABASE_URL` | e.g. `postgres://<user>@localhost:5432/maintenance_hub_local` |
-| `JWT_SECRET` | ≥32 chars |
-| `OPENROUTER_API_KEY` | AI provider (preferred) — OpenRouter, OpenAI-compatible |
-| `OPENROUTER_MODEL` | OpenRouter model slug, default `google/gemini-2.5-flash-lite` |
-| `ANTHROPIC_API_KEY` | AI fallback — used only if `OPENROUTER_API_KEY` is unset |
-| `AI_MODEL` | Anthropic model, default `claude-haiku-4-5-20251001` |
-| `CORS_ORIGINS` | comma-separated exact web origins allowed to call the API (prod); localhost dev origins always allowed |
-| `PORT` | optional, API listen port (default `8091`; hosts inject this) |
-| `MIGRATIONS_DIR` | optional, migrations path (default `../migrations`; Docker image sets `/app/migrations`) |
-| `TWILIO_ACCOUNT_SID` / `TWILIO_AUTH_TOKEN` | platform Twilio credentials |
-| `SMTP_HOST` / `SMTP_PORT` / `SMTP_USERNAME` / `SMTP_PASSWORD` | email outreach |
-| `OUTREACH_SIMULATE` | `1` = record outreach sends without calling providers (demo w/o creds) |
-| `SMS_CLASSIFY_GAP_SECONDS` / `SMS_POLL_INTERVAL_SECONDS` | intake classification pacing (demo: 5/5) |
-| `CALENDAR_WEBHOOK_URL` | public URL for Microsoft Graph webhooks (optional) |
-
-Per-org settings (via provision CLI or SQL): `organizations.twilio_phone_number`
-(the org's SMS number for intake + outreach), `organizations.outreach_email_from`.
-Outlook connections are configured per org in the app (`PUT /api/calendar/connection`).
-
-## Deploy (beta)
-
-The hosted **API + Postgres** run on Render via `render.yaml` (Docker build from the
-repo-root `Dockerfile`); the **web app** stays on Vercel.
-
-1. **API + DB:** Render dashboard → New → Blueprint → point at this repo. Migrations
-   run on boot. Fill the `sync: false` secrets in the dashboard (`ANTHROPIC_API_KEY`,
-   `CORS_ORIGINS`, Twilio/SMTP). `OUTREACH_SIMULATE=1` is kept on until real creds land.
-2. **Provision each customer org** (no self-serve signup) — run the provision CLI once
-   per org against the prod `DATABASE_URL` (Render shell or locally):
-   `go run ./cmd/provision -org "..." -email ... -password ... -name ... -twilio "+1..."`
-3. **Web:** on Vercel set `VITE_API_URL` to the Render API URL (no trailing slash) and
-   ensure `VITE_DEMO` is **unset** (the `VITE_DEMO=1` build is the read-only snapshot).
-   Add the Vercel web URL to the API's `CORS_ORIGINS`.
-4. Each org needs its own Twilio number (intake resolves the org by receiving number);
-   point that number's inbound webhook at `POST /api/sms/webhook`.
-
-## Webhooks (production)
-
-- `POST /api/sms/webhook` — Twilio inbound SMS (intake **and** vendor replies;
-  vendor replies are matched to open outreach requests by `WO-<id>` reference or
-  vendor phone and land in the ticket thread instead of the intake queue)
-- `POST /api/outreach/email/inbound` — inbound-parse style email replies
-- `POST /api/calendar/webhook` — Microsoft Graph change notifications
+More detail: `FEATURE_PLAN.md` (product scope), `TECHNICAL_PLAN.md` (architecture), `DECISIONS.md` (build log), `deploy/ovh/README.md` (production deploy).
